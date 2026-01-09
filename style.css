@@ -211,29 +211,15 @@ header {
     }
 }
 
-#controle-tipo {
-    padding: 15px 30px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-    background: #f7f9f8;
-}
-
-#controle-tipo span {
-    font-weight: bold;
-}
-
-#controle-tipo button {
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid #1f7a4f;
-    background: white;
+#alterar-tipo {
+    background: transparent;
+    border: 2px solid #1f7a4f;
     color: #1f7a4f;
+    padding: 6px 12px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
-#controle-tipo button.ativo {
-    background: #1f7a4f;
-    color: white;
+#filtros-ativos button {
+    white-space: nowrap;
 }

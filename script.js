@@ -127,29 +127,14 @@ function irParaCampos() {
 
 function aplicarFiltros() {
     filtrosAtivos = {
-        tipo: tipoSelecionado || null,
         bairro: document.getElementById("filtro-bairro")?.value || null,
         valorMin: document.getElementById("filtro-min")?.value || null,
         valorMax: document.getElementById("filtro-max")?.value || null,
         tamanho: document.getElementById("filtro-tamanho")?.value || null
     };
 
-    let resultado = imoveis.filter(imovel => {
-
-        if (filtrosAtivos.tipo && imovel.tipo !== filtrosAtivos.tipo) return false;
-        if (filtrosAtivos.bairro && imovel.bairro !== filtrosAtivos.bairro) return false;
-        if (filtrosAtivos.valorMin && imovel.preco < filtrosAtivos.valorMin) return false;
-        if (filtrosAtivos.valorMax && imovel.preco > filtrosAtivos.valorMax) return false;
-        if (filtrosAtivos.tamanho && imovel.tamanho < filtrosAtivos.tamanho) return false;
-
-        return true;
-    });
-
-    //renderizarImoveis(resultado);
     atualizarTela();
-    mostrarFiltrosAtivos();
     fecharModal();
-    destacarTipoSelecionado();
 }
 
 function renderizarImoveis(listaImoveis) {
@@ -181,40 +166,16 @@ function mostrarFiltrosAtivos() {
     const area = document.getElementById("filtros-ativos");
     area.innerHTML = "";
 
-    const temFiltros = Object.values(filtrosAtivos).some(v => v);
-
-    if (!temFiltros) {
-        area.style.display = "none";
-        return;
-    }
-
+    // A barra SEMPRE visível
     area.style.display = "flex";
 
-    Object.entries(filtrosAtivos).forEach(([chave, valor]) => {
-        if (!valor) return;
-
-        let texto = "";
-
-        if (chave === "tipo") texto = `Tipo: ${valor}`;
-        if (chave === "bairro") texto = `Bairro: ${valor}`;
-        if (chave === "valorMin") texto = `Valor mín: ${valor}`;
-        if (chave === "valorMax") texto = `Valor máx: ${valor}`;
-        if (chave === "tamanho") texto = `Tamanho mín: ${valor} m²`;
-
-        area.innerHTML += `
-            <div class="filtro-tag">
-                ${texto}
-                <span onclick="removerFiltro('${chave}')">✕</span>
-            </div>
-        `;
-    });
-
+    // Botões SEMPRE presentes
     area.innerHTML += `
+        <button id="alterar-tipo" onclick="abrirAlterarTipo()">Alterar tipo</button>
         <button id="alterar-filtros" onclick="abrirAlterarFiltros()">Alterar filtros</button>
         <button id="limpar-tudo" onclick="limparTudo()">Limpar tudo</button>
     `;
 }
-
 
 
 function removerFiltro(chave) { // NÃO chamar render direto, usar atualizarTela()
@@ -235,6 +196,7 @@ function abrirAlterarFiltros() { //ALTERAR FILTROS
 
 function ordenar(campo, direcao) {
     ordenacaoAtual = { campo, direcao };
+    atualizarTela();
 }
 
 
@@ -246,15 +208,12 @@ window.onload = () => { // Inicialização segura da aplicação
     document.getElementById("step2").style.display = "none";
     document.getElementById("step3").style.display = "none";
     document.getElementById("step4").style.display = "none";
-    document.getElementById("modal").style.display = "flex";
 
-    destacarTipoSelecionado()
 };
 
 
 function limparTudo() { //DEVE LIMPRAR O FILTRO
      filtrosAtivos = {
-        tipo: null,
         bairro: null,
         valorMin: null,
         valorMax: null,
@@ -262,7 +221,6 @@ function limparTudo() { //DEVE LIMPRAR O FILTRO
     };
 
     tipoSelecionado = null;
-    destacarTipoSelecionado();
     ordenacaoAtual = { campo: null, direcao: null };
 
     atualizarTela();
@@ -271,7 +229,7 @@ function limparTudo() { //DEVE LIMPRAR O FILTRO
 function atualizarTela() {
     let resultado = imoveis.filter(imovel => {
 
-        if (filtrosAtivos.tipo && imovel.tipo !== filtrosAtivos.tipo) return false;
+        if (tipoSelecionado && imovel.tipo !== tipoSelecionado) return false;
         if (filtrosAtivos.bairro && imovel.bairro !== filtrosAtivos.bairro) return false;
         if (filtrosAtivos.valorMin && imovel.preco < filtrosAtivos.valorMin) return false;
         if (filtrosAtivos.valorMax && imovel.preco > filtrosAtivos.valorMax) return false;
@@ -292,25 +250,17 @@ function atualizarTela() {
     mostrarFiltrosAtivos();
 }
 
-function selecionarTipoGlobal(tipo) {
-    tipoSelecionado = tipo;
-    atualizarTela();
-    destacarTipoSelecionado();
+
+
+function abrirAlterarTipo() { // OBS: Alterar tipo pelo modal
+    const modal = document.getElementById("modal");
+    modal.style.display = "flex";
+
+    document.getElementById("step1").style.display = "block";
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "none";
+    document.getElementById("step4").style.display = "none";
 }
-
-function destacarTipoSelecionado() {
-    document.querySelectorAll("#controle-tipo button").forEach(btn => {
-        btn.classList.remove("ativo");
-
-        if (
-            (btn.innerText === "Todos" && tipoSelecionado === null) ||
-            btn.innerText.toLowerCase() === tipoSelecionado
-        ) {
-            btn.classList.add("ativo");
-        }
-    });
-}
-
 
 
 

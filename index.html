@@ -13,13 +13,6 @@
         <p>Encontre seu imóvel ideal</p>
     </header>
 
-    <div id="controle-tipo">
-    <span>Tipo de imóvel:</span>
-    <button onclick="selecionarTipoGlobal(null)">Todos</button>
-    <button onclick="selecionarTipoGlobal('lote')">Lote</button>
-    <button onclick="selecionarTipoGlobal('casa')">Casa</button>
-    <button onclick="selecionarTipoGlobal('apartamento')">Apartamento</button>
-    </div>
 
 
 
@@ -33,11 +26,12 @@
     <button onclick="ordenar('tamanho', 'desc')">Tamanho ⬇</button>
     </div>
 
-    <section class="imoveis" id="lista-imoveis">
-    </section>
+    <main class="imoveis" id="lista-imoveis">
+    </main>
 
-<div id="modal" class="modal">
-    <div class="modal-content">
+<div id="modal" class="modal" onclick="fecharModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+
 
         <h2>Olá 👋</h2>
         <p>
