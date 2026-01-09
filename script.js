@@ -13,7 +13,7 @@ const imoveis = [
         cidade: "Itaúna - MG",
         preco: 120000,
         tamanho: 300,
-        imagem: "https://via.placeholder.com/300x200",
+        imagem: "https://images.homify.com/v1448129217/p/photo/image/1135013/7.jpg",
         whatsapp: "5531999999999"
     },
     {
@@ -23,7 +23,7 @@ const imoveis = [
         cidade: "Itaúna - MG",
         preco: 350000,
         tamanho: 180,
-        imagem: "https://via.placeholder.com/300x200",
+        imagem: "https://images.homify.com/v1448129217/p/photo/image/1135013/7.jpg",
         whatsapp: "5531999999999"
     },
     {
@@ -33,7 +33,7 @@ const imoveis = [
         cidade: "Itaúna - MG",
         preco: 95000,
         tamanho: 250,
-        imagem: "https://via.placeholder.com/300x200",
+        imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8Fm4cZI93rFq0kC6HmUzNH6m7Ig62HwJxnNuNNtcPlQ&s",
         whatsapp: "5531999999999"
     }
 ];
@@ -153,7 +153,7 @@ function renderizarImoveis(listaImoveis) {
     lista.innerHTML = "";
 
     if (listaImoveis.length === 0) {
-        lista.innerHTML = "<p>Nenhum imóvel encontrado.</p>";
+        mostrarModalNenhumImovel();
         return;
     }
 
@@ -276,6 +276,18 @@ function abrirAlterarTipo() { // OBS: Alterar tipo pelo
 }
 
 
+function mostrarModalNenhumImovel() {
+    document.getElementById("modal-aviso").style.display = "flex";
+}
+
+function fecharModalAviso() {
+    document.getElementById("modal-aviso").style.display = "none";
+}
+
+function confirmarNenhumImovel() {
+    fecharModalAviso();
+    limparTudo();
+}
 
 
 console.log("Site carregado com sucesso!");

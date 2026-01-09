@@ -87,6 +87,16 @@
 </div>
 
 
+<!-- MODAL DE AVISO -->
+<div id="modal-aviso" class="modal" style="display:none;" onclick="fecharModalAviso()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h3>Nenhum imóvel encontrado 😕</h3>
+        <p>Tente alterar o tipo ou os filtros.</p>
+        <button onclick="confirmarNenhumImovel()">OK</button>
+    </div>
+</div>
+
+
 <script src="script.js"></script>
 
 </body>
