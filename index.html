@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imovel Ideal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Lotes e Casas à Venda</h1>
+        <p>Encontre seu imóvel ideal</p>
+    </header>
+
+    <div id="controle-tipo">
+    <span>Tipo de imóvel:</span>
+    <button onclick="selecionarTipoGlobal(null)">Todos</button>
+    <button onclick="selecionarTipoGlobal('lote')">Lote</button>
+    <button onclick="selecionarTipoGlobal('casa')">Casa</button>
+    <button onclick="selecionarTipoGlobal('apartamento')">Apartamento</button>
+    </div>
+
+
+
+    <div id="filtros-ativos" style="display:none;"></div>
+
+    <div id="ordenacao">
+    <span>Ordenar por:</span>
+    <button onclick="ordenar('preco', 'asc')">Preço ⬆</button>
+    <button onclick="ordenar('preco', 'desc')">Preço ⬇</button>
+    <button onclick="ordenar('tamanho', 'asc')">Tamanho ⬆</button>
+    <button onclick="ordenar('tamanho', 'desc')">Tamanho ⬇</button>
+    </div>
+
+    <section class="imoveis" id="lista-imoveis">
+    </section>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+
+        <h2>Olá 👋</h2>
+        <p>
+            Aqui você encontra imóveis que não existem em outros sites.<br>
+            Nosso ideal é facilitar e ajudar no seu sonho.<br>
+            Apenas divulgamos as opções.
+        </p>
+
+        <!-- ETAPA 1 -->
+        <div id="step1">
+            <p><strong>O que você está procurando?</strong></p>
+
+            <div class="options">
+                <button onclick="selectTipo('lote')">Lote</button>
+                <button onclick="selectTipo('casa')">Casa</button>
+                <button onclick="selectTipo('apartamento')">Apartamento</button>
+                <button onclick="selectTipo('olhando')">Só olhando</button>
+            </div>
+        </div>
+
+        <!-- ETAPA 2 -->
+        <div id="step2" style="display:none;">
+            <p><strong>Deseja usar filtros de pesquisa?</strong></p>
+            <div class="options">
+                <button onclick="mostrarFiltros()">Sim</button>
+                <button onclick="fecharModal()">Não</button>
+            </div>
+        </div>
+
+        <!-- ETAPA 3 -->
+        <div id="step3" style="display:none;">
+            <p><strong>Quais filtros deseja usar?</strong></p>
+
+            <label><input type="checkbox" class="filtro"> Bairro</label><br>
+            <label><input type="checkbox" class="filtro"> Valor mínimo</label><br>
+            <label><input type="checkbox" class="filtro"> Valor máximo</label><br>
+            <label><input type="checkbox" class="filtro"> Tamanho</label>
+
+            <button id="btnProximo" disabled onclick="irParaCampos()">Próximo</button>
+        </div>
+
+        <!-- ETAPA 4 -->
+        <div id="step4" style="display:none;">
+            <p><strong>Preencha os filtros escolhidos</strong></p>
+
+            <div id="campos-filtros"></div>
+
+            <button onclick="aplicarFiltros()">Aplicar filtros</button>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+
+
+</html>
