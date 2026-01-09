@@ -249,7 +249,7 @@ window.onload = () => { // Inicialização segura da aplicação
 };
 
 
-function limparTudo() { //DEVE LIMPRAR O FILTRO
+function limparTudo() { //DEVE LIMPRAR O FILTRO E ORDANAÇÃO
      filtrosAtivos = {
         bairro: null,
         valorMin: null,
@@ -266,6 +266,7 @@ function limparTudo() { //DEVE LIMPRAR O FILTRO
     });
 
     atualizarTela();
+    atualizarTextoOrdenacao();
 }
 
 function atualizarTela() {
@@ -358,6 +359,41 @@ function ativarSelecaoFiltros() {
     });
 }
 
+function alternarOrdenacao(campo) {
+    // Se clicou no mesmo campo → alterna direção
+    if (ordenacaoAtual.campo === campo) {
+        ordenacaoAtual.direcao =
+            ordenacaoAtual.direcao === "desc" ? "asc" : "desc";
+    } else {
+        // Se mudou de campo → começa em desc
+        ordenacaoAtual.campo = campo;
+        ordenacaoAtual.direcao = "desc";
+    }
+
+    atualizarTextoOrdenacao();
+    atualizarTela();
+}
+
+function atualizarTextoOrdenacao() { //para atualizar o texto
+    const btnPreco = document.getElementById("ord-preco");
+    const btnTamanho = document.getElementById("ord-tamanho");
+
+    // Preço
+    if (ordenacaoAtual.campo === "preco") {
+        btnPreco.innerText =
+            ordenacaoAtual.direcao === "asc" ? "Preço ↑" : "Preço ↓";
+    } else {
+        btnPreco.innerText = "Preço -";
+    }
+
+    // Tamanho
+    if (ordenacaoAtual.campo === "tamanho") {
+        btnTamanho.innerText =
+            ordenacaoAtual.direcao === "asc" ? "Tamanho ↑" : "Tamanho ↓";
+    } else {
+        btnTamanho.innerText = "Tamanho -";
+    }
+}
 
 
 console.log("Site carregado com sucesso!");

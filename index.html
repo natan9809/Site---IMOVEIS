@@ -19,11 +19,9 @@
     <div id="filtros-ativos"></div>
 
     <div id="ordenacao">
-    <span>Ordenar por:</span>
-    <button onclick="ordenar('preco', 'asc')">Preço ⬆</button>
-    <button onclick="ordenar('preco', 'desc')">Preço ⬇</button>
-    <button onclick="ordenar('tamanho', 'asc')">Tamanho ⬆</button>
-    <button onclick="ordenar('tamanho', 'desc')">Tamanho ⬇</button>
+        <span>Ordenar por:</span>
+        <button id="ord-preco" onclick="alternarOrdenacao('preco')">Preço -</button>
+        <button id="ord-tamanho" onclick="alternarOrdenacao('tamanho')">Tamanho -</button>
     </div>
 
     <main class="imoveis" id="lista-imoveis">
