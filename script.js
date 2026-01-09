@@ -99,51 +99,40 @@ function irParaCampos() {
 
         // BAIRRO
         if (filtro === "bairro") {
-            container.innerHTML += `
-                <p><strong>Bairro</strong></p>
-                <div class="filtro-botoes" data-filtro="bairro">
-                    <button data-valor="Centro">Centro</button>
-                    <button data-valor="Santanense">Santanense</button>
-                    <button data-valor="Sao Bento">São Bento</button>
-                </div>
-            `;
-        }
+                container.innerHTML += `
+                    <label><strong>Bairro</strong></label>
+                    <select id="filtro-bairro">
+                        <option value="">Selecione</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Santanense">Santanense</option>
+                        <option value="Sao Bento">São Bento</option>
+                    </select>
+                `;
+            }
 
         // VALOR MIN
         if (filtro === "valorMin") {
-            container.innerHTML += `
-                <p><strong>Valor mínimo</strong></p>
-                <div class="filtro-botoes" data-filtro="valorMin">
-                    <button data-valor="80000">80 mil</button>
-                    <button data-valor="100000">100 mil</button>
-                    <button data-valor="150000">150 mil</button>
-                </div>
-            `;
-        }
+                container.innerHTML += `
+                    <label><strong>Valor mínimo</strong></label>
+                    <input type="number" id="filtro-min" placeholder="Ex: 100000">
+                `;
+            }
 
         // VALOR MAX
         if (filtro === "valorMax") {
-            container.innerHTML += `
-                <p><strong>Valor máximo</strong></p>
-                <div class="filtro-botoes" data-filtro="valorMax">
-                    <button data-valor="200000">200 mil</button>
-                    <button data-valor="300000">300 mil</button>
-                    <button data-valor="500000">500 mil</button>
-                </div>
-            `;
-        }
+                container.innerHTML += `
+                    <label><strong>Valor máximo</strong></label>
+                    <input type="number" id="filtro-max" placeholder="Ex: 300000">
+                `;
+            }
 
         // TAMANHO
         if (filtro === "tamanho") {
-            container.innerHTML += `
-                <p><strong>Tamanho mínimo</strong></p>
-                <div class="filtro-botoes" data-filtro="tamanho">
-                    <button data-valor="150">150 m²</button>
-                    <button data-valor="200">200 m²</button>
-                    <button data-valor="300">300 m²</button>
-                </div>
-            `;
-        }
+                container.innerHTML += `
+                    <label><strong>Tamanho mínimo (m²)</strong></label>
+                    <input type="number" id="filtro-tamanho" placeholder="Ex: 200">
+                `;
+            }
     });
 
     ativarEventosBotoesFiltro();
@@ -151,6 +140,12 @@ function irParaCampos() {
 
 
 function aplicarFiltros() {
+    filtrosAtivos = {
+        bairro: document.getElementById("filtro-bairro")?.value || null,
+        valorMin: document.getElementById("filtro-min")?.value || null,
+        valorMax: document.getElementById("filtro-max")?.value || null,
+        tamanho: document.getElementById("filtro-tamanho")?.value || null
+    };
     atualizarTela();
     fecharModal();
 }
@@ -210,6 +205,30 @@ function abrirAlterarFiltros() { //ALTERAR FILTROS
     document.getElementById("step2").style.display = "none";
     document.getElementById("step3").style.display = "block";
     document.getElementById("step4").style.display = "none";
+
+
+
+    /// 🔹 garante múltipla seleção funcionando
+    const botoes = document.querySelectorAll("#selecao-filtros button");
+    const botaoProximo = document.getElementById("btnProximo");
+
+    let algumAtivo = false;
+
+    botoes.forEach(btn => {
+        btn.classList.remove("ativo"); // limpa visual
+
+        btn.onclick = () => {
+            btn.classList.toggle("ativo");
+
+            algumAtivo = [...botoes].some(b =>
+                b.classList.contains("ativo")
+            );
+
+            botaoProximo.disabled = !algumAtivo;
+        };
+    });
+    botaoProximo.disabled = true;
+
 }
 
 function ordenar(campo, direcao) {
