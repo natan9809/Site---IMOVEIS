@@ -1,6 +1,8 @@
 let filtrosAtivos = {};
 let tipoSelecionado = "";
 let ordenacaoAtual = { campo: null, direcao: null };
+let modoAlterarTipo = false;
+
 
 
 const imoveis = [
@@ -55,6 +57,15 @@ function proximaPergunta() {
 
 function selectTipo(tipo) {
     tipoSelecionado = tipo;
+
+    // Se estiver alterando tipo, troca direto
+    if (modoAlterarTipo) {
+        modoAlterarTipo = false;
+        fecharModal();
+        atualizarTela();
+        return;
+    }
+
     document.getElementById("step1").style.display = "none";
 
     if (tipo === "olhando") {
@@ -252,7 +263,9 @@ function atualizarTela() {
 
 
 
-function abrirAlterarTipo() { // OBS: Alterar tipo pelo modal
+function abrirAlterarTipo() { // OBS: Alterar tipo pelo 
+    modoAlterarTipo = true;
+
     const modal = document.getElementById("modal");
     modal.style.display = "flex";
 
