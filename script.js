@@ -2,6 +2,7 @@ let filtrosAtivos = {};
 let tipoSelecionado = "";
 let ordenacaoAtual = { campo: null, direcao: null };
 let modoAlterarTipo = false;
+let avisoAberto = false;
 
 
 
@@ -79,14 +80,7 @@ function mostrarFiltros() {
     document.getElementById("step2").style.display = "none";
     document.getElementById("step3").style.display = "block";
 
-    const checkboxes = document.querySelectorAll(".filtro");
-    const botao = document.getElementById("btnProximo");
-
-    checkboxes.forEach(cb => {
-        cb.addEventListener("change", () => {
-            botao.disabled = ![...checkboxes].some(c => c.checked);
-        });
-    });
+    ativarSelecaoFiltros();
 }
 
 function fecharModal() {
@@ -100,50 +94,63 @@ function irParaCampos() {
     const container = document.getElementById("campos-filtros");
     container.innerHTML = "";
 
-    document.querySelectorAll(".filtro").forEach(filtro => {
-        if (filtro.checked) {
-            const texto = filtro.parentElement.innerText;
+    document.querySelectorAll("#selecao-filtros button.ativo").forEach(botao => {
+        const filtro = botao.dataset.filtro;
 
-            if (texto.includes("Bairro")) {
-                container.innerHTML += `
-                    <select id="filtro-bairro">
-                        <option value="">Selecione o bairro</option>
-                        <option value="Sao Bento">São Bento</option>
-                        <option value="Santanense">Santanense</option>
-                        <option value="Centro">Centro</option>
-                    </select>
-                `;
-            }
+        // BAIRRO
+        if (filtro === "bairro") {
+            container.innerHTML += `
+                <p><strong>Bairro</strong></p>
+                <div class="filtro-botoes" data-filtro="bairro">
+                    <button data-valor="Centro">Centro</button>
+                    <button data-valor="Santanense">Santanense</button>
+                    <button data-valor="Sao Bento">São Bento</button>
+                </div>
+            `;
+        }
 
-            if (texto.includes("Valor mínimo")) {
-                container.innerHTML += `
-                    <input type="number" id="filtro-min" placeholder="Valor mínimo">
-                `;
-            }
+        // VALOR MIN
+        if (filtro === "valorMin") {
+            container.innerHTML += `
+                <p><strong>Valor mínimo</strong></p>
+                <div class="filtro-botoes" data-filtro="valorMin">
+                    <button data-valor="80000">80 mil</button>
+                    <button data-valor="100000">100 mil</button>
+                    <button data-valor="150000">150 mil</button>
+                </div>
+            `;
+        }
 
-            if (texto.includes("Valor máximo")) {
-                container.innerHTML += `
-                    <input type="number" id="filtro-max" placeholder="Valor máximo">
-                `;
-            }
+        // VALOR MAX
+        if (filtro === "valorMax") {
+            container.innerHTML += `
+                <p><strong>Valor máximo</strong></p>
+                <div class="filtro-botoes" data-filtro="valorMax">
+                    <button data-valor="200000">200 mil</button>
+                    <button data-valor="300000">300 mil</button>
+                    <button data-valor="500000">500 mil</button>
+                </div>
+            `;
+        }
 
-            if (texto.includes("Tamanho")) {
-                container.innerHTML += `
-                    <input type="number" id="filtro-tamanho" placeholder="Tamanho mínimo (m²)">
-                `;
-            }
+        // TAMANHO
+        if (filtro === "tamanho") {
+            container.innerHTML += `
+                <p><strong>Tamanho mínimo</strong></p>
+                <div class="filtro-botoes" data-filtro="tamanho">
+                    <button data-valor="150">150 m²</button>
+                    <button data-valor="200">200 m²</button>
+                    <button data-valor="300">300 m²</button>
+                </div>
+            `;
         }
     });
+
+    ativarEventosBotoesFiltro();
 }
 
-function aplicarFiltros() {
-    filtrosAtivos = {
-        bairro: document.getElementById("filtro-bairro")?.value || null,
-        valorMin: document.getElementById("filtro-min")?.value || null,
-        valorMax: document.getElementById("filtro-max")?.value || null,
-        tamanho: document.getElementById("filtro-tamanho")?.value || null
-    };
 
+function aplicarFiltros() {
     atualizarTela();
     fecharModal();
 }
@@ -234,6 +241,11 @@ function limparTudo() { //DEVE LIMPRAR O FILTRO
     tipoSelecionado = null;
     ordenacaoAtual = { campo: null, direcao: null };
 
+    // remove visual ativo dos botões
+    document.querySelectorAll(".filtro-botoes button").forEach(btn => {
+        btn.classList.remove("ativo");
+    });
+
     atualizarTela();
 }
 
@@ -276,9 +288,11 @@ function abrirAlterarTipo() { // OBS: Alterar tipo pelo
 }
 
 
-function mostrarModalNenhumImovel() {
-    document.getElementById("modal-aviso").style.display = "flex";
+function fecharModalAviso() {
+    avisoAberto = false;
+    document.getElementById("modal-aviso").style.display = "none";
 }
+
 
 function fecharModalAviso() {
     document.getElementById("modal-aviso").style.display = "none";
@@ -288,6 +302,43 @@ function confirmarNenhumImovel() {
     fecharModalAviso();
     limparTudo();
 }
+
+
+
+function ativarEventosBotoesFiltro() {
+    document.querySelectorAll(".filtro-botoes").forEach(grupo => {
+        const filtro = grupo.dataset.filtro;
+
+        grupo.querySelectorAll("button").forEach(botao => {
+            botao.onclick = () => {
+                // desativa outros do mesmo grupo
+                grupo.querySelectorAll("button").forEach(b => b.classList.remove("ativo"));
+
+                // ativa o clicado
+                botao.classList.add("ativo");
+
+                // salva valor
+                filtrosAtivos[filtro] = botao.dataset.valor;
+            };
+        });
+    });
+}
+
+
+function ativarSelecaoFiltros() {
+    const botoes = document.querySelectorAll("#selecao-filtros button");
+    const botaoProximo = document.getElementById("btnProximo");
+
+    botoes.forEach(btn => {
+        btn.onclick = () => {
+            btn.classList.toggle("ativo");
+
+            const algumAtivo = [...botoes].some(b => b.classList.contains("ativo"));
+            botaoProximo.disabled = !algumAtivo;
+        };
+    });
+}
+
 
 
 console.log("Site carregado com sucesso!");

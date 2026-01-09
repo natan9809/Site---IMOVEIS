@@ -16,7 +16,7 @@
 
 
 
-    <div id="filtros-ativos" style="display:none;"></div>
+    <div id="filtros-ativos"></div>
 
     <div id="ordenacao">
     <span>Ordenar por:</span>
@@ -65,13 +65,16 @@
         <div id="step3" style="display:none;">
             <p><strong>Quais filtros deseja usar?</strong></p>
 
-            <label><input type="checkbox" class="filtro"> Bairro</label><br>
-            <label><input type="checkbox" class="filtro"> Valor mínimo</label><br>
-            <label><input type="checkbox" class="filtro"> Valor máximo</label><br>
-            <label><input type="checkbox" class="filtro"> Tamanho</label>
+            <div id="selecao-filtros" class="filtro-botoes">
+                <button data-filtro="bairro">Bairro</button>
+                <button data-filtro="valorMin">Valor mínimo</button>
+                <button data-filtro="valorMax">Valor máximo</button>
+                <button data-filtro="tamanho">Tamanho</button>
+            </div>
 
             <button id="btnProximo" disabled onclick="irParaCampos()">Próximo</button>
         </div>
+
 
         <!-- ETAPA 4 -->
         <div id="step4" style="display:none;">
