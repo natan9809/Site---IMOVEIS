@@ -244,4 +244,13 @@ header {
     text-align: center;
 }
 
+/* botão de ordenação ativo */
+#ordenacao button.ativo {
+    background: #1f7a4f;
+    color: white;
+    border-color: #1f7a4f;
+}
+
+
+
 

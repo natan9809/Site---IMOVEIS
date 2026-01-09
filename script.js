@@ -3,41 +3,21 @@ let tipoSelecionado = "";
 let ordenacaoAtual = { campo: null, direcao: null };
 let modoAlterarTipo = false;
 let avisoAberto = false;
+let imoveis = IMOVEIS;
+atualizarTela();
 
 
+fetch("imoveis.json")
+  .then(res => res.json())
+  .then(data => {
+    imoveis = data.map(item => ({
+      ...item,
+      preco: Number(item.preco),
+      tamanho: Number(item.tamanho)
+    }));
+    atualizarTela();
+  })
 
-const imoveis = [
-    {
-        titulo: "Lote no Centro",
-        tipo: "lote",
-        bairro: "Centro",
-        cidade: "Itaúna - MG",
-        preco: 120000,
-        tamanho: 300,
-        imagem: "https://images.homify.com/v1448129217/p/photo/image/1135013/7.jpg",
-        whatsapp: "5531999999999"
-    },
-    {
-        titulo: "Casa no Santanense",
-        tipo: "casa",
-        bairro: "Santanense",
-        cidade: "Itaúna - MG",
-        preco: 350000,
-        tamanho: 180,
-        imagem: "https://images.homify.com/v1448129217/p/photo/image/1135013/7.jpg",
-        whatsapp: "5531999999999"
-    },
-    {
-        titulo: "Lote São Bento",
-        tipo: "lote",
-        bairro: "Sao Bento",
-        cidade: "Itaúna - MG",
-        preco: 95000,
-        tamanho: 250,
-        imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8Fm4cZI93rFq0kC6HmUzNH6m7Ig62HwJxnNuNNtcPlQ&s",
-        whatsapp: "5531999999999"
-    }
-];
 
 function proximaPergunta() {
     const tipo = document.getElementById("tipo-imovel").value;
@@ -163,7 +143,7 @@ function renderizarImoveis(listaImoveis) {
         lista.innerHTML += `
             <div class="card">
                 <img src="${imovel.imagem}">
-                <h2>${imovel.titulo}</h2>
+                <h2>${imovel.tipo.toUpperCase()} no Bairro ${imovel.bairro}</h2>
                 <p>📍 ${imovel.bairro} - ${imovel.cidade}</p>
                 <p>📐 ${imovel.tamanho} m²</p>
                 <p>💰 R$ ${imovel.preco.toLocaleString("pt-BR")}</p>
@@ -314,10 +294,6 @@ function fecharModalAviso() {
 }
 
 
-function fecharModalAviso() {
-    document.getElementById("modal-aviso").style.display = "none";
-}
-
 function confirmarNenhumImovel() {
     fecharModalAviso();
     limparTudo();
@@ -325,24 +301,6 @@ function confirmarNenhumImovel() {
 
 
 
-function ativarEventosBotoesFiltro() {
-    document.querySelectorAll(".filtro-botoes").forEach(grupo => {
-        const filtro = grupo.dataset.filtro;
-
-        grupo.querySelectorAll("button").forEach(botao => {
-            botao.onclick = () => {
-                // desativa outros do mesmo grupo
-                grupo.querySelectorAll("button").forEach(b => b.classList.remove("ativo"));
-
-                // ativa o clicado
-                botao.classList.add("ativo");
-
-                // salva valor
-                filtrosAtivos[filtro] = botao.dataset.valor;
-            };
-        });
-    });
-}
 
 
 function ativarSelecaoFiltros() {
@@ -378,10 +336,15 @@ function atualizarTextoOrdenacao() { //para atualizar o texto
     const btnPreco = document.getElementById("ord-preco");
     const btnTamanho = document.getElementById("ord-tamanho");
 
+    // limpa estado visual
+    btnPreco.classList.remove("ativo");
+    btnTamanho.classList.remove("ativo");
+
     // Preço
     if (ordenacaoAtual.campo === "preco") {
         btnPreco.innerText =
             ordenacaoAtual.direcao === "asc" ? "Preço ↑" : "Preço ↓";
+        btnPreco.classList.add("ativo");
     } else {
         btnPreco.innerText = "Preço -";
     }
@@ -390,6 +353,7 @@ function atualizarTextoOrdenacao() { //para atualizar o texto
     if (ordenacaoAtual.campo === "tamanho") {
         btnTamanho.innerText =
             ordenacaoAtual.direcao === "asc" ? "Tamanho ↑" : "Tamanho ↓";
+        btnTamanho.classList.add("ativo");
     } else {
         btnTamanho.innerText = "Tamanho -";
     }
