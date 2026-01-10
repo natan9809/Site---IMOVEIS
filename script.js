@@ -13,6 +13,8 @@ window.onload = () => { // Inicialização segura da aplicação
     document.getElementById("step2").style.display = "none";
     document.getElementById("step3").style.display = "none";
     document.getElementById("step4").style.display = "none";
+    document.getElementById("btn-so-olhando").style.display = "block";
+
 
 };
 
@@ -55,6 +57,8 @@ function selectTipo(tipo) {
     } else {
         document.getElementById("step2").style.display = "block";
     }
+    atualizarContador();
+
 }
 
 function mostrarFiltros() {
@@ -95,7 +99,6 @@ function irParaCampos() {
             `;
         }
 
-
         // VALOR MIN
         if (filtro === "valorMin") {
                 container.innerHTML += `
@@ -120,6 +123,21 @@ function irParaCampos() {
                 `;
             }
     });
+
+    setTimeout(() => {
+        document.querySelectorAll("#campos-filtros input, #campos-filtros select")
+            .forEach(el => {
+                el.addEventListener("input", () => {
+                    filtrosAtivos.bairro = document.getElementById("filtro-bairro")?.value || null;
+                    filtrosAtivos.valorMin = document.getElementById("filtro-min")?.value || null;
+                    filtrosAtivos.valorMax = document.getElementById("filtro-max")?.value || null;
+                    filtrosAtivos.tamanho = document.getElementById("filtro-tamanho")?.value || null;
+
+                    atualizarContador();
+                });
+            });
+    }, 0);
+
 
     ativarEventosBotoesFiltro();
 }
@@ -237,6 +255,8 @@ function abrirAlterarFiltros() { //ALTERAR FILTROS
     });
     botaoProximo.disabled = true;
 
+    atualizarContador();
+
 }
 
 function ordenar(campo, direcao) {
@@ -296,6 +316,9 @@ function atualizarTela() {
     } else {
         esconderFiltrosAtivos();
     }
+
+    atualizarContador();
+
 }
 
 
@@ -310,6 +333,10 @@ function abrirAlterarTipo() { // OBS: Alterar tipo pelo
     document.getElementById("step2").style.display = "none";
     document.getElementById("step3").style.display = "none";
     document.getElementById("step4").style.display = "none";
+    document.getElementById("btn-so-olhando").style.display = "none";//ESCONDE "Só olhando" ao alterar tipo
+
+    atualizarContador();
+
 }
 
 
@@ -402,6 +429,32 @@ function atualizarTextoOrdenacao() { //para atualizar o texto
 function esconderFiltrosAtivos() {
     const area = document.getElementById("filtros-ativos");
     area.style.display = "none";
+}
+
+
+function calcularQuantidadeDisponivel() {
+    return imoveis.filter(imovel => {
+
+        if (tipoSelecionado && imovel.tipo !== tipoSelecionado) return false;
+        if (filtrosAtivos.bairro && imovel.bairro !== filtrosAtivos.bairro) return false;
+        if (filtrosAtivos.valorMin && imovel.preco < filtrosAtivos.valorMin) return false;
+        if (filtrosAtivos.valorMax && imovel.preco > filtrosAtivos.valorMax) return false;
+        if (filtrosAtivos.tamanho && imovel.tamanho < filtrosAtivos.tamanho) return false;
+
+        return true;
+    }).length;
+}
+
+function atualizarContador() {
+    const contador = document.getElementById("contador-disponiveis");
+    if (!contador) return;
+
+    const total = calcularQuantidadeDisponivel();
+
+    contador.innerText =
+        total === 1
+            ? "1 item disponível"
+            : `${total} itens disponíveis`;
 }
 
 

@@ -30,11 +30,17 @@
         <div id="intro-texto">
             <h2>Olá 👋</h2>
             <p>
-                Aqui você encontra imóveis que não existem em outros sites.<br>
-                Nosso ideal é facilitar e ajudar no seu sonho.<br>
+                Aqui você encontra IMOVEL que não existem em outros sites.<br>
+                Nosso IDEAL é facilitar e ajudar no seu sonho.<br>
                 Apenas divulgamos as opções.
             </p>
         </div>
+
+        <p id="contador-disponiveis" style="margin-top:10px; font-weight:bold;">
+            0 imovel para vizualizar
+        </p>
+
+
         <!-- ETAPA 1 -->
         <div id="step1">
             <p><strong>O que você está procurando?</strong></p>
@@ -43,7 +49,9 @@
                 <button onclick="selectTipo('lote')">Lote</button>
                 <button onclick="selectTipo('casa')">Casa</button>
                 <button onclick="selectTipo('apartamento')">Apartamento</button>
-                <button onclick="selectTipo('olhando')">Só olhando</button>
+                <!--<button onclick="selectTipo('olhando')">Só olhando</button> -----alterado para-->
+                <button id="btn-so-olhando" onclick="selectTipo('olhando')">Só olhando</button>
+
             </div>
         </div>
 
