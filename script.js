@@ -132,6 +132,23 @@ function aplicarFiltros() {
         valorMax: document.getElementById("filtro-max")?.value || null,
         tamanho: document.getElementById("filtro-tamanho")?.value || null
     };
+
+    const resultado = imoveis.filter(imovel => {
+        if (tipoSelecionado && imovel.tipo !== tipoSelecionado) return false;
+        if (filtrosAtivos.bairro && imovel.bairro !== filtrosAtivos.bairro) return false;
+        if (filtrosAtivos.valorMin && imovel.preco < filtrosAtivos.valorMin) return false;
+        if (filtrosAtivos.valorMax && imovel.preco > filtrosAtivos.valorMax) return false;
+        if (filtrosAtivos.tamanho && imovel.tamanho < filtrosAtivos.tamanho) return false;
+        return true;
+    });
+
+    // ❗ SE NÃO HÁ RESULTADOS
+    if (resultado.length === 0) {
+        fecharModal();
+        mostrarModalNenhumImovel();
+        return;
+    }
+
     atualizarTela();
     fecharModal();
 }
@@ -301,19 +318,25 @@ function fecharModalAviso() {
     document.getElementById("modal-aviso").style.display = "none";
 }
 
+function mostrarModalNenhumImovel() {
+    // fecha o modal de filtros
+    document.getElementById("modal").style.display = "none";
+
+    // abre o modal de aviso
+    document.getElementById("modal-aviso").style.display = "flex";
+}
+
+
+
 
 function confirmarNenhumImovel() {
     fecharModalAviso();
-    limparTudo();
-        // Garante que o modal inicial volte
-    document.getElementById("modal").style.display = "flex";
-    document.getElementById("step1").style.display = "block";
-    document.getElementById("step2").style.display = "none";
-    document.getElementById("step3").style.display = "none";
-    document.getElementById("step4").style.display = "none";
 
-    // Texto institucional volta (se você aplicou a melhoria anterior)
-    document.getElementById("intro-texto").style.display = "block";
+    // limpa apenas os filtros
+    filtrosAtivos = {};
+
+    // NÃO limpa o tipo selecionado
+    atualizarTela();
 }
 
 

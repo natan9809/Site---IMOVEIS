@@ -2,7 +2,7 @@
 const BAIRROS = [
   "Centro",
   "Santanense",
-  "Sao Bento",
+  "São Bento",
   "Morada Nova",
   "Jadir Marinho",
   "Cidade Nova",
