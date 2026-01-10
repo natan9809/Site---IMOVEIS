@@ -7,7 +7,7 @@ let imoveis = IMOVEIS;
 
 
 window.onload = () => { // Inicialização segura da aplicação
-    atualizarTela()
+    //atualizarTela() TRAVAR TESTE
     document.getElementById("modal").style.display = "flex";
     document.getElementById("step1").style.display = "block";
     document.getElementById("step2").style.display = "none";
@@ -149,7 +149,7 @@ function renderizarImoveis(listaImoveis) {
         lista.innerHTML += `
             <div class="card">
                 <img src="${imovel.imagem}">
-                <h2>${imovel.tipo.toUpperCase()} no Bairro ${imovel.bairro}</h2>
+                <h2>${imovel.tipo.toUpperCase()} – ${imovel.bairro} – ${imovel.tamanho}m²</h2>
                 <p>📍 ${imovel.bairro} - ${imovel.cidade}</p>
                 <p>📐 ${imovel.tamanho} m²</p>
                 <p>💰 R$ ${imovel.preco.toLocaleString("pt-BR")}</p>
@@ -184,7 +184,7 @@ function removerFiltro(chave) { // NÃO chamar render direto, usar atualizarTela
 
 
 function abrirAlterarFiltros() { //ALTERAR FILTROS
-    modoAlterarTipo = true;
+    modoAlterarTipo = false;
 
     const modal = document.getElementById("modal");
     modal.style.display = "flex";
@@ -222,10 +222,7 @@ function abrirAlterarFiltros() { //ALTERAR FILTROS
 
 }
 
-function ordenar(campo, direcao) {
-    ordenacaoAtual = { campo, direcao };
-    atualizarTela();
-}
+
 
 
 
@@ -276,10 +273,13 @@ function atualizarTela() {
 
     if (resultado.length > 0) {
         mostrarFiltrosAtivos();
+        mostrarOrdenacao();
     } else {
         esconderFiltrosAtivos();
+        esconderOrdenacao();
     }
 }
+
 
 
 
@@ -379,6 +379,14 @@ function atualizarTextoOrdenacao() { //para atualizar o texto
 function esconderFiltrosAtivos() {
     const area = document.getElementById("filtros-ativos");
     area.style.display = "none";
+}
+
+function esconderOrdenacao() {
+    document.getElementById("ordenacao").style.display = "none";
+}
+
+function mostrarOrdenacao() {
+    document.getElementById("ordenacao").style.display = "flex";
 }
 
 
