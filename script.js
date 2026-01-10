@@ -4,19 +4,17 @@ let ordenacaoAtual = { campo: null, direcao: null };
 let modoAlterarTipo = false;
 let avisoAberto = false;
 let imoveis = IMOVEIS;
-atualizarTela();
 
 
-fetch("imoveis.json")
-  .then(res => res.json())
-  .then(data => {
-    imoveis = data.map(item => ({
-      ...item,
-      preco: Number(item.preco),
-      tamanho: Number(item.tamanho)
-    }));
-    atualizarTela();
-  })
+window.onload = () => { // Inicialização segura da aplicação
+    atualizarTela()
+    document.getElementById("modal").style.display = "flex";
+    document.getElementById("step1").style.display = "block";
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "none";
+    document.getElementById("step4").style.display = "none";
+
+};
 
 
 function proximaPergunta() {
@@ -38,6 +36,9 @@ function proximaPergunta() {
 
 function selectTipo(tipo) {
     tipoSelecionado = tipo;
+
+    // some o texto institucional
+    document.getElementById("intro-texto").style.display = "none";
 
     // Se estiver alterando tipo, troca direto
     if (modoAlterarTipo) {
@@ -79,16 +80,21 @@ function irParaCampos() {
 
         // BAIRRO
         if (filtro === "bairro") {
-                container.innerHTML += `
-                    <label><strong>Bairro</strong></label>
-                    <select id="filtro-bairro">
-                        <option value="">Selecione</option>
-                        <option value="Centro">Centro</option>
-                        <option value="Santanense">Santanense</option>
-                        <option value="Sao Bento">São Bento</option>
-                    </select>
-                `;
-            }
+
+            let opcoesBairro = `<option value="">Selecione</option>`;
+
+            BAIRROS.forEach(bairro => {
+                opcoesBairro += `<option value="${bairro}">${bairro}</option>`;
+            });
+
+            container.innerHTML += `
+                <label><strong>Bairro</strong></label>
+                <select id="filtro-bairro">
+                    ${opcoesBairro}
+                </select>
+            `;
+        }
+
 
         // VALOR MIN
         if (filtro === "valorMin") {
@@ -178,8 +184,13 @@ function removerFiltro(chave) { // NÃO chamar render direto, usar atualizarTela
 
 
 function abrirAlterarFiltros() { //ALTERAR FILTROS
+    modoAlterarTipo = true;
+
     const modal = document.getElementById("modal");
     modal.style.display = "flex";
+
+    // MOSTRA o texto novamente
+    document.getElementById("intro-texto").style.display = "block"
 
     document.getElementById("step1").style.display = "none";
     document.getElementById("step2").style.display = "none";
@@ -218,15 +229,7 @@ function ordenar(campo, direcao) {
 
 
 
-window.onload = () => { // Inicialização segura da aplicação
-    atualizarTela()
-    document.getElementById("modal").style.display = "flex";
-    document.getElementById("step1").style.display = "block";
-    document.getElementById("step2").style.display = "none";
-    document.getElementById("step3").style.display = "none";
-    document.getElementById("step4").style.display = "none";
 
-};
 
 
 function limparTudo() { //DEVE LIMPRAR O FILTRO E ORDANAÇÃO
@@ -270,7 +273,12 @@ function atualizarTela() {
     }
 
     renderizarImoveis(resultado);
-    mostrarFiltrosAtivos();
+
+    if (resultado.length > 0) {
+        mostrarFiltrosAtivos();
+    } else {
+        esconderFiltrosAtivos();
+    }
 }
 
 
@@ -297,6 +305,15 @@ function fecharModalAviso() {
 function confirmarNenhumImovel() {
     fecharModalAviso();
     limparTudo();
+        // Garante que o modal inicial volte
+    document.getElementById("modal").style.display = "flex";
+    document.getElementById("step1").style.display = "block";
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "none";
+    document.getElementById("step4").style.display = "none";
+
+    // Texto institucional volta (se você aplicou a melhoria anterior)
+    document.getElementById("intro-texto").style.display = "block";
 }
 
 
@@ -357,6 +374,11 @@ function atualizarTextoOrdenacao() { //para atualizar o texto
     } else {
         btnTamanho.innerText = "Tamanho -";
     }
+}
+
+function esconderFiltrosAtivos() {
+    const area = document.getElementById("filtros-ativos");
+    area.style.display = "none";
 }
 
 
