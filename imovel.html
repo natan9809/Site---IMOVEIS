@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Imóvel</title>
+    <link rel="stylesheet" href="imovel.css">
+</head>
+<body>
+
+<header class="topo">
+    <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+    <h1 id="titulo-imovel"></h1>
+</header>
+
+<main class="container">
+
+    <!-- GALERIA -->
+    <section class="galeria">
+        <button class="nav prev" onclick="imagemAnterior()">‹</button>
+        <img id="imagem-principal">
+        <button class="nav next" onclick="proximaImagem()">›</button>
+    </section>
+
+
+    <!-- DISPONÍVEL EM -->
+    <div class="layout-imovel">
+
+        <!-- DETALHES -->
+        <section class="detalhes">
+            <p id="local"></p>
+            <p id="tamanho"></p>
+            <p id="preco"></p>
+            <p id="descricao"></p>
+        </section>
+
+
+        <!-- LATERAL DIREITA -->
+        <aside class="coluna-lateral">
+            <div class="card-contato">
+            <h3>Disponível em:</h3>
+
+            <div id="lista-empresas">
+                <!-- O JS já preenche aqui -->
+            </div>
+
+            <p class="hint-contato">
+                Clique na empresa acima para deixar seu nome e ver o contato
+            </p>
+            </div>
+        </aside>
+
+        
+</div>
+
+
+    <!--CARROSEL-->
+   <section class="meu-filtro">
+    <div class="meu-filtro-header">
+        <h3 id="titulo-meu-filtro"></h3>
+
+        <div class="setas">
+        <button id="prevFiltro" class="seta">‹</button>
+        <button id="nextFiltro" class="seta">›</button>
+        </div>
+    </div>
+
+    <div class="carrossel-container" id="carrossel-filtro">
+        <!-- cards entram via JS -->
+    </div>
+    </section>
+
+
+
+</main>
+
+<script src="imoveis.js"></script>
+<script src="imovel.js"></script>
+</body>
+</html>

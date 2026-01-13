@@ -1,0 +1,321 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+.topo {
+    background: #1f7a4f;
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-voltar {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+.galeria {
+    position: relative;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.galeria img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+}
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.detalhes {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+.empresas {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+#lista-empresas {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.empresa {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.empresa img {
+    max-width: 100%;
+    height: 50px;
+    object-fit: contain;
+}
+
+.fallback {
+    text-align: center;
+}
+
+.fallback button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #1f7a4f;
+    color: white;
+    cursor: pointer;
+}
+
+.info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.meu-filtro {
+  margin: 40px 20px;
+}
+
+.meu-filtro h3 {
+  margin-bottom: 15px;
+  color: #1f7a4f;
+}
+
+.carrossel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carrossel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+}
+
+.carrossel::-webkit-scrollbar {
+  display: none;
+}
+
+.card-filtro {
+  min-width: 240px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  cursor: pointer;
+}
+
+.card-filtro img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card-filtro div {
+  padding: 10px;
+}
+
+.card-filtro strong {
+  display: block;
+}
+
+.nav {
+  background: #1f7a4f;
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav.left {
+  margin-right: 10px;
+}
+
+.nav.right {
+  margin-left: 10px;
+}
+
+.meu-filtro {
+  margin: 40px 0;
+}
+
+.meu-filtro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.setas {
+  display: flex;
+  gap: 8px;
+}
+
+.seta {
+  background: #e9e9e9;
+  border: none;
+  font-size: 22px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.seta:hover {
+  background: #1f7a4f;
+  color: #fff;
+}
+
+.carrossel-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.carrossel-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.carrossel-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.card-filtro {
+  min-width: 240px;
+  max-width: 240px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.card-filtro img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card-filtro .info {
+  padding: 10px;
+}
+
+.card-filtro h4 {
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+.card-filtro span {
+  font-weight: bold;
+  color: #1f7a4f;
+}
+
+
+.layout-imovel {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.coluna-lateral {
+  position: relative;
+}
+
+.card-contato {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 100px;
+}
+
+.hint-contato {
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .layout-imovel {
+    grid-template-columns: 1fr;
+  }
+
+  .card-contato {
+    position: static;
+  }
+}
+
+.card-info-imovel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+@media (max-width: 900px) {
+  .layout-imovel {
+    flex-direction: column;
+  }
+
+  .coluna-lateral {
+    position: relative;
+    top: auto;
+  }
+}
+
+.btn-contato-dono{
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #1f7a4f;
+    color: white;
+    cursor: pointer;}

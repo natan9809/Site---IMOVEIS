@@ -7,17 +7,34 @@ let imoveis = IMOVEIS;
 
 
 window.onload = () => { // Inicialização segura da aplicação
+
+    // restaura estado salvo (se existir)
+    const estadoSalvo = localStorage.getItem("estadoFiltro");
+    if (estadoSalvo) {
+        const estado = JSON.parse(estadoSalvo);
+        tipoSelecionado = estado.tipoSelecionado;
+        filtrosAtivos = estado.filtrosAtivos;
+        ordenacaoAtual = estado.ordenacaoAtual;
+    }
+
     atualizarTela()
-    document.getElementById("modal").style.display = "flex";
-    document.getElementById("step1").style.display = "block";
-    document.getElementById("step2").style.display = "none";
-    document.getElementById("step3").style.display = "none";
-    document.getElementById("step4").style.display = "none";
-    document.getElementById("btn-so-olhando").style.display = "block";
 
+    const voltarSemModal = localStorage.getItem("voltarSemModal");
 
+    if (voltarSemModal === "true" || tipoSelecionado || filtrosAtivos)  {
+        // NÃO abre modal
+        localStorage.removeItem("voltarSemModal");
+        fecharModal();
+    } else {
+
+        document.getElementById("modal").style.display = "flex";
+        document.getElementById("step1").style.display = "block";
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step3").style.display = "none";
+        document.getElementById("step4").style.display = "none";
+        document.getElementById("btn-so-olhando").style.display = "block";
+    }
 };
-
 
 function proximaPergunta() {
     const tipo = document.getElementById("tipo-imovel").value;
@@ -142,7 +159,6 @@ function irParaCampos() {
     ativarEventosBotoesFiltro();
 }
 
-
 function aplicarFiltros() {
     filtrosAtivos = {
         bairro: document.getElementById("filtro-bairro")?.value || null,
@@ -182,15 +198,13 @@ function renderizarImoveis(listaImoveis) {
 
     listaImoveis.forEach(imovel => {
         lista.innerHTML += `
-            <div class="card">
+        
+            <div class="card" onclick="abrirImovel(${imovel.id})">
                 <img src="${imovel.imagem}">
                 <h2>${imovel.tipo.toUpperCase()} no Bairro ${imovel.bairro}</h2>
-                <p>📍 ${imovel.bairro} - ${imovel.cidade}</p>
                 <p>📐 ${imovel.tamanho} m²</p>
                 <p>💰 R$ ${imovel.preco.toLocaleString("pt-BR")}</p>
-                <a href="https://wa.me/${imovel.whatsapp}" target="_blank">
-                    Falar no WhatsApp
-                </a>
+                
             </div>
         `;
     });
@@ -211,12 +225,10 @@ function mostrarFiltrosAtivos() {
     `;
 }
 
-
 function removerFiltro(chave) { // NÃO chamar render direto, usar atualizarTela()
     filtrosAtivos[chave] = null;
     atualizarTela();
 }
-
 
 function abrirAlterarFiltros() { //ALTERAR FILTROS
     modoAlterarTipo = true;
@@ -263,11 +275,6 @@ function ordenar(campo, direcao) {
     ordenacaoAtual = { campo, direcao };
     atualizarTela();
 }
-
-
-
-
-
 
 function limparTudo() { //DEVE LIMPRAR O FILTRO E ORDANAÇÃO
      filtrosAtivos = {
@@ -321,8 +328,6 @@ function atualizarTela() {
 
 }
 
-
-
 function abrirAlterarTipo() { // OBS: Alterar tipo pelo 
     modoAlterarTipo = true;
 
@@ -339,7 +344,6 @@ function abrirAlterarTipo() { // OBS: Alterar tipo pelo
 
 }
 
-
 function fecharModalAviso() {
     avisoAberto = false;
     document.getElementById("modal-aviso").style.display = "none";
@@ -353,9 +357,6 @@ function mostrarModalNenhumImovel() {
     document.getElementById("modal-aviso").style.display = "flex";
 }
 
-
-
-
 function confirmarNenhumImovel() {
     fecharModalAviso();
 
@@ -365,10 +366,6 @@ function confirmarNenhumImovel() {
     // NÃO limpa o tipo selecionado
     atualizarTela();
 }
-
-
-
-
 
 function ativarSelecaoFiltros() {
     const botoes = document.querySelectorAll("#selecao-filtros button");
@@ -431,7 +428,6 @@ function esconderFiltrosAtivos() {
     area.style.display = "none";
 }
 
-
 function calcularQuantidadeDisponivel() {
     return imoveis.filter(imovel => {
 
@@ -456,6 +452,26 @@ function atualizarContador() {
             ? "1 item disponível"
             : `${total} itens disponíveis`;
 }
+
+function salvarEstado() {
+    localStorage.setItem("estadoFiltro", JSON.stringify({
+        tipoSelecionado,
+        filtrosAtivos,
+        ordenacaoAtual
+    }));
+}
+
+function abrirImovel(id) {
+    salvarEstado();
+    window.location.href = `imovel.html?id=${id}`;
+}
+
+function voltar() {
+    localStorage.setItem("voltarSemModal", "true");
+    window.history.back();
+}
+
+
 
 
 console.log("Site carregado com sucesso!");

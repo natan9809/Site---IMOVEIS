@@ -7,25 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <header>
+    <header><!--Cabeçalho TOPO-->
         <h1>Lotes e Casas à Venda</h1>
         <p>Encontre seu imóvel ideal</p>
     </header>
 
-    <div id="filtros-ativos"></div>
+    <div id="filtros-ativos"></div><!--Alterar tipo, alterar filtro e limpar tudo, criado em JS-->
 
-    <div id="ordenacao">
+    <div id="ordenacao"> <!--criado botao de ordenação, funçao em JS-->
         <span>Ordenar por:</span>
         <button id="ord-preco" onclick="alternarOrdenacao('preco')">Preço -</button>
         <button id="ord-tamanho" onclick="alternarOrdenacao('tamanho')">Tamanho -</button>
     </div>
 
-    <main class="imoveis" id="lista-imoveis">
+    <main class="imoveis" id="lista-imoveis"> <!--Lista de imoveis criada em JS-->
     </main>
 
-<div id="modal" class="modal" onclick="fecharModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
+<div id="modal" class="modal" onclick="fecharModal()"> <!--Moda janela flutuante-->
+    <div class="modal-content" onclick="event.stopPropagation()"><!--container do modal-->
 
         <div id="intro-texto">
             <h2>Olá 👋</h2>
