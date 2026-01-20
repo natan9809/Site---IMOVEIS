@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Portal Imobiliário</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<!-- TOPO -->
+ <header class="header">
+  <div class="logo">🏠 Portal Imóveis</div>
+    <nav class="menu">
+      <a href="index.html">Imóveis</a>
+      <a href="imobiliarias.html">Imobiliárias</a>
+      <a href="corretores.html">Corretores</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Encontre o imóvel dos seus sonhos</h1>
+    <p>Casas, apartamentos e lotes em Itaúna</p>
+
+    <div class="busca">
+      <input placeholder="Tipo">
+      <input placeholder="Bairro">
+      <button>Buscar</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- CARROSSEL IMÓVEIS -->
+<section class="secao">
+  <div class="secao-header">
+    <h2>Imóveis em destaque</h2>
+    <button class="ver-todos">Ver todos</button>
+  </div>
+
+  <div class="carrossel">
+    <div class="card-imovel">
+      <img src="img/imovel1.jpg">
+      <h3>Casa no Centro</h3>
+      <span>R$ 320.000</span>
+    </div>
+
+    <div class="card-imovel">
+      <img src="img/imovel2.jpg">
+      <h3>Lote São Bento</h3>
+      <span>R$ 150.000</span>
+    </div>
+
+    <div class="card-imovel">
+      <img src="img/imovel3.jpg">
+      <h3>Apartamento Novo</h3>
+      <span>R$ 280.000</span>
+    </div>
+  </div>
+</section>
+
+<!-- IMOBILIÁRIAS -->
+<section class="secao-imobiliarias">
+  <div class="secao-header">
+    <h2>Imobiliárias parceiras</h2>
+    <button class="ver-todos">Ver todas</button>
+  </div>
+
+  <div class="carrossel-wrapper">
+    <button class="seta esquerda" onclick="scrollImobiliarias(-1)">‹</button>
+
+    <div class="carrossel" id="carrossel-imobiliarias">
+      <!-- JS insere aqui -->
+    </div>
+
+    <button class="seta direita" onclick="scrollImobiliarias(1)">›</button>
+  </div>
+</section>
+
+
+<!-- CORRETORES -->
+<section class="secao">
+  <div class="secao-header">
+    <h2>Corretores de imóveis</h2>
+    <button class="ver-todos">Ver todos</button>
+  </div>
+
+  <div class="carrossel-wrapper">
+    <button class="seta esquerda" onclick="scrollCorretores(-1)">‹</button>
+
+    <div class="carrossel" id="carrossel-corretores">
+      <!-- JS insere aqui -->
+    </div>
+
+    <button class="seta direita" onclick="scrollCorretores(1)">›</button>
+  </div>
+</section>
+
+
+<!-- SOBRE -->
+<section class="sobre">
+  <h2>Por que criamos este portal?</h2>
+  <p>
+    Nosso objetivo é facilitar a conexão entre clientes, corretores e imobiliárias,
+    trazendo transparência, praticidade e oportunidades reais de negócio.
+  </p>
+
+  <div class="diferenciais">
+    <div>✔ Experiência no mercado</div>
+    <div>✔ Conexão local</div>
+    <div>✔ Imóveis verificados</div>
+  </div>
+</section>
+
+<!-- COMENTÁRIOS -->
+<section class="comentarios">
+  <h2>Deixe seu comentário</h2>
+
+  <input placeholder="Seu nome">
+  <textarea placeholder="Escreva sua mensagem"></textarea>
+  <button>Enviar comentário</button>
+</section>
+
+<!-- MODAL IMOBILIÁRIA -->
+<div id="modal-imobiliaria" class="modal" onclick="fecharModalImobiliaria()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+
+    <button class="fechar-modal" onclick="fecharModalImobiliaria()">×</button>
+
+    <img id="modal-logo" class="modal-logo">
+
+    <h2 id="modal-nome"></h2>
+    <p id="modal-cidade"></p>
+
+    <div id="modal-contatos" class="linha-contatos"></div>
+
+  </div>
+</div>
+<!--MODAL CORRETOI-->
+<div id="modal-corretor" class="modal" onclick="fecharModalCorretor()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+
+    <button class="fechar-modal" onclick="fecharModalCorretor()">×</button>
+
+    <img id="modal-corretor-foto" class="modal-logo">
+
+    <h2 id="modal-corretor-nome"></h2>
+    <p id="modal-corretor-cidade"></p>
+
+    <div id="modal-corretor-contatos" class="linha-contatos"></div>
+
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footer">
+  © 2026 - Portal Imobiliário
+</footer>
+
+
+
+
+<script src="corretores.js"></script>
+<script src="imobiliarias.js"></script>
+<script src="home.js"></script>
+
+</body>
+</html>

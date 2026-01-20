@@ -73,6 +73,25 @@
 
 </main>
 
+<!-- MODAL CONTATO DONO -->
+<div id="modal-contato" class="modal hidden">
+  <div class="modal-content">
+    <h3>Quero que entrem em contato comigo</h3>
+
+    <form id="form-contato">
+      <input type="text" id="contato-nome" placeholder="Seu nome" required>
+      <input type="tel" id="contato-telefone" placeholder="Telefone / WhatsApp" required>
+      <input type="email" id="contato-email" placeholder="E-mail" required>
+
+      <div class="acoes">
+        <button type="submit" class="btn-enviar">Enviar</button>
+        <button type="button" class="btn-cancelar" onclick="fecharModalContato()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 <script src="imoveis.js"></script>
 <script src="imovel.js"></script>
 </body>

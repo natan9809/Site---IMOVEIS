@@ -56,9 +56,10 @@ const dono = document.createElement("div");
 dono.className = "empresa dono";
 dono.innerHTML = `
     <p>Não tem imobiliaria ou corretor cadastrado?</p>
-    <button class="btn-contato-dono">
+    <button onclick="abrirModalContato()">
         Quero que entrem em contato comigo
     </button>
+
 `;
 dono.onclick = contatoDireto;
 
@@ -78,11 +79,11 @@ function contatoEmpresa(emp) {
 }
 
 function contatoDireto() {
-    const nome = prompt("Digite seu nome:");
+    //const nome = prompt("Digite seu nome:");
     if (!nome) return;
 
     window.open(
-        `https://wa.me/55SEUNUMERO?text=${encodeURIComponent(
+        `https://wa.me/5537998090048?text=${encodeURIComponent(
             `Olá, meu nome é ${nome}. Tenho interesse no imóvel ${imovel.id}.`
         )}`,
         "_blank"
@@ -180,5 +181,42 @@ function atualizarTituloMeuFiltro(bairroFiltro) {
 
 const meuFiltro = gerarMeuFiltro(imovel)
 renderizarMeuFiltro(meuFiltro);
+
+function abrirModalContato() {
+  document.getElementById("modal-contato").classList.remove("hidden");
+}
+
+function fecharModalContato() {
+  document.getElementById("modal-contato").classList.add("hidden");
+}
+
+document.getElementById("form-contato").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const nome = document.getElementById("contato-nome").value;
+  const telefone = document.getElementById("contato-telefone").value;
+  const email = document.getElementById("contato-email").value;
+
+  // 🔴 AQUI É ONDE VAI PARA VOCÊ
+  // Por enquanto vamos enviar via WhatsApp (simples)
+  // depois podemos trocar por banco, email, formulário etc
+
+  const mensagem = `
+Novo contato do site
+
+Nome: ${nome}
+Telefone: ${telefone}
+Email: ${email}
+Imóvel: ${imovel.tipo.toUpperCase()} - ${imovel.bairro} (ID ${imovel.id})
+  `;
+
+  window.open(
+    `https://wa.me/5537998090048?text=${encodeURIComponent(mensagem)}`,
+    "_blank"
+  );
+
+  fecharModalContato();
+});
+
 
 
