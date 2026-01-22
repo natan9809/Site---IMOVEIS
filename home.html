@@ -2,16 +2,16 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Portal Imobiliário</title>
+  <title>Facilita Imóvel</title>
   <link rel="stylesheet" href="home.css">
 </head>
 <body>
 
 <!-- TOPO -->
  <header class="header">
-  <div class="logo">🏠 Portal Imóveis</div>
+   <a href="home.html"><div class="logo">Facilita Imóvel</div></a>
     <nav class="menu">
-      <a href="index.html">Imóveis</a>
+      <!--href="index.html"--><a>Imóveis</a>
       <a href="imobiliarias.html">Imobiliárias</a>
       <a href="corretores.html">Corretores</a>
       <a href="contato.html">Contato</a>
@@ -26,46 +26,80 @@
 
     <div class="busca">
       <input placeholder="Tipo">
-      <input placeholder="Bairro">
+      <div class="campo-autocomplete">
+        <input
+          type="text"
+          id="input-bairro"
+          placeholder="Bairro"
+          autocomplete="off"
+        >
+        <ul id="lista-bairros" class="lista-autocomplete"></ul>
+      </div>
+
       <button>Buscar</button>
     </div>
   </div>
 </section>
 
+<!-- SOBRE -->
+<section class="sobre">
+<h2>Por que criamos este site?</h2>
+
+<p>
+  Encontrar um lote, casa ou corretor não precisa ser complicado.
+  Ao procurar um imóvel, percebemos como existem muitas imobiliárias e corretores,
+  com informações espalhadas, o que acaba confundindo quem está buscando.
+</p>
+<p>
+  O <strong>Facilita Imóvel</strong> foi criado justamente para organizar tudo isso em um só lugar,
+  facilitando a busca, economizando tempo e ajudando mais pessoas a encontrarem o imóvel ideal.
+</p>
+<p>
+  Aqui você pode comparar opções, acessar sites, falar diretamente com os profissionais
+  e tomar decisões com mais rapidez e segurança.
+</p>
+<p>
+  🔹 Simples<br>
+  🔹 Organizado<br>
+  🔹 Do jeito que você precisa
+</p>
+<hr>
+<p>
+  <strong>Sua participação é muito importante.</strong><br>
+  Deixe seu comentário dizendo o que achou do site e, se conhecer outros corretores
+  ou imobiliárias, fique à vontade para indicar.
+  Assim, o Facilita Imóvel cresce e ajuda cada vez mais pessoas.
+</p>
+
+</section>
+
 
 <!-- CARROSSEL IMÓVEIS -->
-<section class="secao">
+<section class="secao ">
   <div class="secao-header">
     <h2>Imóveis em destaque</h2>
-    <button class="ver-todos">Ver todos</button>
+    <!--<a href="index.html" class="ver-todos">Ver todos</a>-->
+  </div>
+  
+
+  <div class="carrossel-wrapper">
+    <!--<button class="seta esquerda" onclick="scrollImoveis(-1)">‹</button>-->
+
+    <!--<div class="carrossel" id="carrossel-destaque">-->
+    <H3>EM BREVE</H3>
+      <!--carrossel js-->
+    </div>
+
+    <!--<button class="seta direita" onclick="scrollImoveis(1)">›</button>-->
   </div>
 
-  <div class="carrossel">
-    <div class="card-imovel">
-      <img src="img/imovel1.jpg">
-      <h3>Casa no Centro</h3>
-      <span>R$ 320.000</span>
-    </div>
-
-    <div class="card-imovel">
-      <img src="img/imovel2.jpg">
-      <h3>Lote São Bento</h3>
-      <span>R$ 150.000</span>
-    </div>
-
-    <div class="card-imovel">
-      <img src="img/imovel3.jpg">
-      <h3>Apartamento Novo</h3>
-      <span>R$ 280.000</span>
-    </div>
-  </div>
 </section>
 
 <!-- IMOBILIÁRIAS -->
 <section class="secao-imobiliarias">
   <div class="secao-header">
     <h2>Imobiliárias parceiras</h2>
-    <button class="ver-todos">Ver todas</button>
+    <a href="imobiliarias.html" class="ver-todos">Ver todas</a>
   </div>
 
   <div class="carrossel-wrapper">
@@ -84,7 +118,7 @@
 <section class="secao">
   <div class="secao-header">
     <h2>Corretores de imóveis</h2>
-    <button class="ver-todos">Ver todos</button>
+    <a href="corretores.html" class="ver-todos">Ver todos</a>
   </div>
 
   <div class="carrossel-wrapper">
@@ -99,20 +133,6 @@
 </section>
 
 
-<!-- SOBRE -->
-<section class="sobre">
-  <h2>Por que criamos este portal?</h2>
-  <p>
-    Nosso objetivo é facilitar a conexão entre clientes, corretores e imobiliárias,
-    trazendo transparência, praticidade e oportunidades reais de negócio.
-  </p>
-
-  <div class="diferenciais">
-    <div>✔ Experiência no mercado</div>
-    <div>✔ Conexão local</div>
-    <div>✔ Imóveis verificados</div>
-  </div>
-</section>
 
 <!-- COMENTÁRIOS -->
 <section class="comentarios">
@@ -160,12 +180,11 @@
 
 
 <footer class="footer">
-  © 2026 - Portal Imobiliário
+  © 2026 - Facilita Imóvel
 </footer>
 
-
-
-
+<script src="dados.js"></script>
+<script src="imoveis.js"></script>
 <script src="corretores.js"></script>
 <script src="imobiliarias.js"></script>
 <script src="home.js"></script>

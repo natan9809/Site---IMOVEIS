@@ -1,0 +1,201 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f5;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background: #1f7a4f;
+  color: white;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  }
+
+a {
+  text-decoration: none;
+}
+.menu {
+  display: flex;
+  gap: 24px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+.container {
+  padding: 40px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.card img {
+  max-width: 140px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin: 6px 0;
+}
+
+.card span {
+  font-size: 14px;
+  color: #666;
+}
+
+.card button {
+  margin-top: 14px;
+  background: #1f7a4f;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background: #16613e;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  width: 100%;
+  max-width: 250px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* CONTATOS */
+.contato {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.contato button {
+  background: #1f7a4f;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.feedback {
+  margin-top: 15px;
+  color: green;
+  font-size: 14px;
+}
+
+/* LOGO NO MODAL */
+.modal-logo {
+  max-width: 140px;
+  max-height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* CONTATO COM ÍCONE */
+.contato {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.contato span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contato button {
+  background: #1f7a4f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.contato button:hover {
+  background: #16613e;
+}
+
+.ordenacao {
+  margin-bottom: 20px;
+}
+
+.ordenacao button {
+  background: #1f7a4f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ordenacao button:hover {
+  background: #16613e;
+}

@@ -5,8 +5,11 @@ const IMOVEIS = [
     bairro: "Centro",
     cidade: "Itaúna",
     imagem: "img/imoveis/1/1.jpg",
+    destaque: true,
     preco: 320000,
     tamanho: 120,
+    destaque: true,
+
 
     imagens: [
       "img/imoveis/1/1.jpg",
@@ -52,6 +55,7 @@ const IMOVEIS = [
     preco: 150000,
     tamanho: 250,
     imagem: "img/imoveis/2/1.jpg",
+    destaque: true,
     imagens: [
       "img/imoveis/2/1.jpg",
       "img/imoveis/2/2.jpg"
@@ -83,6 +87,7 @@ const IMOVEIS = [
     preco: 350000,
     tamanho: 140,
     imagens: ["img/imoveis/3/1.jpg"],
+    destaque: true,
     resumo: ["Casa ampla", "Boa ventilação"],
     descricao: "Casa confortável em bairro tranquilo.",
     caracteristicas: ["Garagem", "Área gourmet"],
@@ -97,6 +102,7 @@ const IMOVEIS = [
     preco: 120000,
     tamanho: 300,
     imagens: ["img/imoveis/4/1.jpg"],
+    destaque: true,
     resumo: ["Lote grande"],
     descricao: "Excelente lote para investimento.",
     caracteristicas: ["300m²"],
@@ -111,6 +117,7 @@ const IMOVEIS = [
     preco: 290000,
     tamanho: 110,
     imagens: ["img/imoveis/5/1.jpg"],
+    destaque: true,
     resumo: ["Casa nova"],
     descricao: "Casa recém construída.",
     caracteristicas: ["Quintal", "Porcelanato"],
@@ -125,6 +132,7 @@ const IMOVEIS = [
     preco: 260000,
     tamanho: 85,
     imagens: ["img/imoveis/6/1.jpg"],
+    destaque: true,
     resumo: ["Apartamento moderno"],
     descricao: "Apartamento bem localizado.",
     caracteristicas: ["Elevador"],
@@ -139,6 +147,7 @@ const IMOVEIS = [
     preco: 330000,
     tamanho: 125,
     imagens: ["img/imoveis/7/1.jpg"],
+    destaque: true,
     resumo: ["Casa nova"],
     descricao: "Casa no bairro São Bento.",
     caracteristicas: ["Garagem"],
@@ -153,6 +162,7 @@ const IMOVEIS = [
     preco: 140000,
     tamanho: 280,
     imagens: ["img/imoveis/8/1.jpg"],
+    destaque: true,
     resumo: ["Lote plano"],
     descricao: "Ótimo lote.",
     caracteristicas: [],

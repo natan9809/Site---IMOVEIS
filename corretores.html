@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Corretores - Facilita Imóvel</title>
+  <link rel="stylesheet" href="imobiliarias.css">
+</head>
+<body>
+
+<!-- TOPO -->
+ <header class="header">
+   <a href="home.html"><div class="logo">Facilita Imóvel</div></a>
+    <nav class="menu">
+      <!--href="index.html"--><a>Imóveis</a>
+      <a href="imobiliarias.html">Imobiliárias</a>
+      <a href="corretores.html">Corretores</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+</header>
+
+<main class="container">
+  <h1>Corretores</h1>
+    <div class="ordenacao">
+    <button id="btn-ordem" onclick="alternarOrdem()">
+        Ordenar: A–Z
+    </button>
+    </div>
+
+  <div id="lista-corretores" class="grid"></div>
+</main>
+
+<!-- MODAL CONTATOS -->
+<div id="modal" class="modal" onclick="fecharModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="fechar" onclick="fecharModal()">×</button>
+
+    <img id="modal-logo" class="modal-logo">
+
+    <h2 id="modal-nome"></h2>
+    <p id="modal-cidade"></p>
+
+    <div id="modal-contatos"></div>
+
+    <div id="feedback" class="feedback"></div>
+  </div>
+</div>
+
+
+<script src="corretores.js"></script>
+<script src="corretores-page.js"></script>
+</body>
+</html>

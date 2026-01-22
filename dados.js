@@ -8,3 +8,9 @@ const BAIRROS = [
   "Cidade Nova",
   "Parque Jardim"
 ];
+
+const TIPOS = [
+  "Casa",
+  "Apartamento",
+  "Lote"
+];

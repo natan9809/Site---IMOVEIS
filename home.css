@@ -24,7 +24,13 @@ body {
 .logo {
   font-size: 20px;
   font-weight: bold;
+  color: white;
+  }
+
+a {
+  text-decoration: none;
 }
+
 
 .menu {
   display: flex;
@@ -158,7 +164,7 @@ body {
 /* ================= IMÓVEIS ================= */
 .card-imovel {
   background: white;
-  width: 260px;
+  min-width: 260px;
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
@@ -166,6 +172,8 @@ body {
 
 .card-imovel img {
   width: 100%;
+  height: 160px;
+  object-fit: cover;
   border-radius: 8px;
 }
 
@@ -220,17 +228,6 @@ body {
   color: #666;
 }
 
-.linha-contatos {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.linha-contatos a {
-  font-size: 18px;
-  text-decoration: none;
-}
 
 /* SETAS */
 .seta {
@@ -268,7 +265,7 @@ body {
 /* ================= SOBRE ================= */
 .sobre {
   background: white;
-  padding: 60px 8%;
+  padding: 20px 8%;
 }
 
 .diferenciais {
@@ -361,48 +358,18 @@ body {
   z-index: 999;
 }
 
-.modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 14px;
-  width: 90%;
-  max-width: 420px;
-  text-align: center;
-  position: relative;
-  animation: aparecer .2s ease;
-}
+
 
 @keyframes aparecer {
   from { transform: scale(.9); opacity: 0 }
   to { transform: scale(1); opacity: 1 }
 }
 
-.fechar-modal {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 26px;
-  cursor: pointer;
-}
 
-.modal-logo {
-  max-width: 140px;
-  margin-bottom: 16px;
-}
 
-.linha-contatos {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  margin-top: 20px;
-}
 
-.linha-contatos a {
-  font-size: 22px;
-  text-decoration: none;
-}
+
+
 
 /* MODAL BASE */
 .modal {
@@ -424,6 +391,7 @@ body {
   max-width: 420px;
   text-align: center;
   position: relative;
+  animation: aparecer .2s ease;
 }
 
 /* BOTÃO FECHAR */
@@ -433,13 +401,13 @@ body {
   right: 14px;
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 20px;
   cursor: pointer;
 }
 
 /* LOGO */
 .modal-logo {
-  max-width: 160px;
+  max-width: 140px;
   max-height: 80px;
   object-fit: contain;
   margin-bottom: 15px;
@@ -448,15 +416,16 @@ body {
 /* CONTATOS */
 .linha-contatos {
   display: flex;
-  gap: 18px;
+  gap: 10px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .linha-contatos a {
-  font-size: 26px;
+  font-size: 18px;
   text-decoration: none;
 }
+
 .contato-item {
   font-size: 16px;
   padding: 8px 12px;
@@ -511,4 +480,134 @@ body {
 .card-corretor span {
   font-size: 14px;
   color: #666;
+}
+
+@media (max-width: 768px) {
+  .carrossel {
+    padding-left: 10px;
+  }
+  .carrossel-wrapper {
+  position: relative;
+}
+
+/* SETAS */
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  z-index: 5;
+}
+
+.seta.esquerda {
+  left: -20px;
+}
+
+.seta.direita {
+  right: -20px;
+}
+
+.seta:hover {
+  background: #1f7a4f;
+  color: white;
+}
+
+}
+
+.card-imovel {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-imovel:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.campo-autocomplete {
+  position: relative;
+}
+
+.lista-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1f7a4f;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  list-style: none;
+  padding: 6px 0;
+  margin: 6px 0 0;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 10;
+  display: none;
+}
+
+.lista-autocomplete li {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.lista-autocomplete li:hover {
+  background: #1f7a4f;
+  color: black;
+}
+.linha-contatos {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.contato-btn {
+  background: #1f7a4f;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: auto;
+}
+
+.contato-btn:hover {
+  background: #16613e;
+}
+
+
+#modal-nome {
+  font-size: 20px;
+  margin: 6px 0;
+}
+
+#modal-cidade {
+  font-size: 14px;
+  color: #666;
+}
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 20px;
+  }
+
+  .linha-contatos {
+    flex-direction: column;
+  }
+
+  .contato-btn {
+    justify-content: center;
+    width: 100%;
+  }
 }

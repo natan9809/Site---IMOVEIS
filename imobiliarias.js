@@ -4,11 +4,11 @@ const IMOBILIARIAS = [
     nome: "Solar Imóveis",
     logo: "img/imobiliarias/solar.png",
     cidade: "Itaúna",
-    site: "https://www.solaritauna.com.br/",
     contatos: [
       { tipo: "Telefone", valor: " 553732412639" },
       { tipo: "whatsapp", valor: " 553732412639" },
-      { tipo: "telefone", valor: " 5537991076616" }
+      { tipo: "telefone", valor: " 5537991076616" },
+      {tipo: "site", valor: "https://www.solaritauna.com.br/"}
     ]
   },
   {
@@ -18,7 +18,7 @@ const IMOBILIARIAS = [
     cidade: "Itaúna",
     site: "https://www.saitaimoveis.com.br/saita/site/index.asp",
     contatos: [
-      { tipo: "telefone", valor: ":553732421444" },
+      { tipo: "telefone", valor: "553732421444" },
       { tipo: "whatsapp", valor: "5537984055326" }
     ]
   },
