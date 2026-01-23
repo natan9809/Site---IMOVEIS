@@ -45,31 +45,14 @@
 <section class="sobre">
 <h2>Por que criamos este site?</h2>
 
-<p>
-  Encontrar um lote, casa ou corretor não precisa ser complicado.
-  Ao procurar um imóvel, percebemos como existem muitas imobiliárias e corretores,
-  com informações espalhadas, o que acaba confundindo quem está buscando.
-</p>
-<p>
-  O <strong>Facilita Imóvel</strong> foi criado justamente para organizar tudo isso em um só lugar,
-  facilitando a busca, economizando tempo e ajudando mais pessoas a encontrarem o imóvel ideal.
-</p>
-<p>
-  Aqui você pode comparar opções, acessar sites, falar diretamente com os profissionais
-  e tomar decisões com mais rapidez e segurança.
-</p>
-<p>
-  🔹 Simples<br>
-  🔹 Organizado<br>
-  🔹 Do jeito que você precisa
-</p>
-<hr>
-<p>
+<p>Para reunir imobiliárias, corretores e imóveis em um único lugar e facilitar a busca pelo seu sonho.
+O Facilita Imóvel apenas divulga informações e conecta você aos profissionais — não realizamos trâmites ou negociações.</p>
   <strong>Sua participação é muito importante.</strong><br>
   Deixe seu comentário dizendo o que achou do site e, se conhecer outros corretores
   ou imobiliárias, fique à vontade para indicar.
   Assim, o Facilita Imóvel cresce e ajuda cada vez mais pessoas.
 </p>
+<p>O site esta apenas no inicio</p>
 
 </section>
 
@@ -136,11 +119,30 @@
 
 <!-- COMENTÁRIOS -->
 <section class="comentarios">
-  <h2>Deixe seu comentário</h2>
+  <div class="comentarios-grid">
 
-  <input placeholder="Seu nome">
-  <textarea placeholder="Escreva sua mensagem"></textarea>
-  <button>Enviar comentário</button>
+    <!-- FORMULÁRIO -->
+    <div class="comentario-form">
+      <h2>Deixe seu comentário</h2>
+
+      <input id="comentario-nome" placeholder="Seu nome">
+      <textarea id="comentario-texto" placeholder="Escreva seu comentário"></textarea>
+
+      <button onclick="enviarComentario()">Enviar comentário</button>
+
+      <p id="msg-envio" class="msg-envio"></p>
+    </div>
+
+    <!-- COMENTÁRIOS APROVADOS -->
+    <div class="comentarios-aprovados">
+      <h2>O que as pessoas estão dizendo</h2>
+
+      <div id="lista-comentarios">
+        <!-- JS preenche -->
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <!-- MODAL IMOBILIÁRIA -->
@@ -186,6 +188,7 @@
 <script src="dados.js"></script>
 <script src="imoveis.js"></script>
 <script src="corretores.js"></script>
+<script src="comentarios.js"></script>
 <script src="imobiliarias.js"></script>
 <script src="home.js"></script>
 

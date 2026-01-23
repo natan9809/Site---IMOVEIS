@@ -283,3 +283,11 @@ a {
 
 
 
+
+/* ================= FOOTER ================= */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #1f7a4f;
+  color: white;
+}

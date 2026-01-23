@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Contato - Facilita Imóvel</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<!-- TOPO -->
+ <header class="header">
+   <a href="home.html"><div class="logo">Facilita Imóvel</div></a>
+    <nav class="menu">
+      <!--href="index.html"--><a>Imóveis</a>
+      <a href="imobiliarias.html">Imobiliárias</a>
+      <a href="corretores.html">Corretores</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+</header>
+
+<main class="container">
+  <section class="comentarios">
+    <div class="comentarios-grid">
+
+      <!-- FORMULÁRIO DE CONTATO -->
+      <div class="comentario-form">
+        <h2>Entre em contato</h2>
+        <p>Tire dúvidas, envie sugestões ou fale conosco.</p>
+
+        <input id="contato-nome" placeholder="Seu nome *">
+        <input id="contato-email" placeholder="Seu e-mail *">
+        <input id="contato-telefone" placeholder="Telefone (opcional)">
+
+        <select id="contato-tipo">
+          <option value="">Selecione o tipo *</option>
+          <option value="Sugestão">Sugestão</option>
+          <option value="Dúvida">Dúvida</option>
+          <option value="Outros">Outros</option>
+        </select>
+
+        <textarea id="contato-mensagem" placeholder="Digite sua mensagem *"></textarea>
+
+        <button onclick="enviarContato()">Enviar mensagem</button>
+
+        <p id="msg-contato" class="msg-envio"></p>
+      </div>
+
+      <!-- TEXTO LATERAL -->
+      <div class="comentarios-aprovados">
+        <h2>Sobre a página</h2>
+        <p>Encontrar um lote, casa ou corretor não precisa ser complicado.
+Ao buscar um imóvel, percebemos como existem muitas imobiliárias e corretores, com informações espalhadas em vários lugares, o que acaba confundindo quem está procurando.
+
+O Facilita Imóvel foi criado justamente para organizar tudo isso em um só lugar, facilitando a busca, economizando tempo e ajudando mais pessoas a encontrarem o imóvel ideal.
+
+Aqui você pode comparar opções, acessar sites, falar diretamente com os profissionais e tomar decisões com mais rapidez e clareza.
+
+O Facilita Imóvel apenas divulga informações.
+Não realizamos vendas, negociações ou trâmites imobiliários.
+
+<br>🔹 Simples
+<br>🔹 Organizado
+<br>🔹 Do jeito que você precisa
+<br>Sua participação é muito importante.
+Deixe seu comentário dizendo o que achou do site e, se conhecer outros corretores ou imobiliárias, fique à vontade para indicar. Assim, o Facilita Imóvel cresce e ajuda cada vez mais pessoas.
+
+Este site está apenas no início, e continuará evoluindo com a ajuda de quem usa.
+        </p>
+      </div>
+
+    </div>
+    <!-- TEXTO LATERAL -->
+    <div class="comentarios-aprovados">
+    <h2>Fale com a gente</h2>
+    <p>
+        Sua mensagem será analisada e responderemos
+        o mais breve possível.
+    </p>
+  </section>
+</main>
+<footer class="footer">
+  © 2026 - Facilita Imóvel
+</footer>
+
+<script src="contato.js"></script>
+</body>
+</html>

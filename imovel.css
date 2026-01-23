@@ -376,3 +376,11 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+
+/* ================= FOOTER ================= */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #1f7a4f;
+  color: white;
+}

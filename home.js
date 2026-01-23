@@ -1,4 +1,5 @@
 const containerImobiliarias = document.getElementById("carrossel-imobiliarias");
+console.log("home.js iniciou");
 
 IMOBILIARIAS.forEach(imob => {
   const card = document.createElement("div");
@@ -66,6 +67,7 @@ function fecharModalImobiliaria() {
 }
 
 
+console.log("MODAL");
 const containerCorretores = document.getElementById("carrossel-corretores");
 
 CORRETORES.forEach(corretor => {
@@ -128,11 +130,14 @@ corretor.contatos.forEach(c => {
 }
 
 
+console.log("CORRETORES");
 
 
 function fecharModalCorretor() {
   document.getElementById("modal-corretor").style.display = "none";
 }
+
+console.log("SCROLL");
 
 function scrollCorretores(dir) {
   containerCorretores.scrollBy({
@@ -140,40 +145,49 @@ function scrollCorretores(dir) {
     behavior: "smooth"
   });
 }
+console.log("scrolcorretores")
 function scrollImobiliarias(dir) {
   containerImobiliarias.scrollBy({
     left: dir * 260,
     behavior: "smooth"
   });
 }
+console.log("scrrolimobiliaria")
 const containerDestaque = document.getElementById("carrossel-destaque");
 
+console.log("ANTES DE FILTRAR");
 // filtra apenas imóveis em destaque
 const imoveisDestaque = IMOVEIS.filter(im => im.destaque === true);
+console.log("filtra imoveis");
 
 // fallback: se não tiver destaque, pega os últimos
 const listaFinal = imoveisDestaque.length > 0
   ? imoveisDestaque
   : IMOVEIS.slice(-6);
+console.log("pegar os ultimos");
 
-listaFinal.forEach(imovel => {
-  const card = document.createElement("div");
-  card.className = "card-imovel";
+if (containerDestaque) {
+  listaFinal.forEach(imovel => {
+    const card = document.createElement("div");
+    card.className = "card-imovel";
 
-  card.innerHTML = `
-    <img src="${imovel.imagem}">
-    <h3>${imovel.tipo.toUpperCase()} – ${imovel.bairro}</h3>
-    <span>R$ ${imovel.preco.toLocaleString("pt-BR")}</span>
-  `;
+    card.innerHTML = `
+      <img src="${imovel.imagem}">
+      <h3>${imovel.tipo.toUpperCase()} – ${imovel.bairro}</h3>
+      <span>R$ ${imovel.preco.toLocaleString("pt-BR")}</span>
+    `;
 
-  card.onclick = () => {
-    window.location.href = `imovel.html?id=${imovel.id}`;
-  };
+    card.onclick = () => {
+      window.location.href = `imovel.html?id=${imovel.id}`;
+    };
 
-  containerDestaque.appendChild(card);
-});
+    containerDestaque.appendChild(card);
+  });
+}
 
 
+
+console.log("FILTRAR");
 function scrollImoveis(direcao) {
   const carrossel = document.getElementById("carrossel-destaque");
 
@@ -235,14 +249,19 @@ const inputTipo = document.getElementById("input-tipo");
 const listaTipos = document.getElementById("lista-tipos");
 
 // MOSTRA TODAS AO CLICAR
-inputTipo.addEventListener("focus", () => {
-  mostrarTipos("");
-});
+if (inputTipo && listaTipos) {
+
+  inputTipo.addEventListener("focus", () => {
+    mostrarTipos("");
+  });
 
 // FILTRA AO DIGITAR
-inputTipo.addEventListener("input", () => {
-  mostrarTipos(inputTipo.value);
-});
+
+  inputTipo.addEventListener("input", () => {
+    mostrarTipos(inputTipo.value);
+  });
+
+}
 
 function mostrarTipos(filtro) {
   listaTipos.innerHTML = "";
@@ -267,3 +286,69 @@ function mostrarTipos(filtro) {
 
   listaTipos.style.display = resultados.length ? "block" : "none";
 }
+
+
+// ================= COMENTÁRIOS (FINAL DO HOME.JS) =================
+window.addEventListener("load", () => {
+  const lista = document.getElementById("lista-comentarios");
+  if (!lista) return;
+
+  fetch("https://script.google.com/macros/s/AKfycbzvM2rgpERf4EIsX6KRy4q55Ss127ltRheMoa0zI4NpvTpIwFbjJKQoFwMsiQW-woieUQ/exec")
+    .then(res => res.json())
+    .then(comentarios => {
+      comentarios.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "comentario-item";
+        div.innerHTML = `
+          <strong>${c.nome}</strong>
+          <p>${c.texto}</p>
+        `;
+        lista.appendChild(div);
+      });
+    })
+    .catch(err => {
+      console.error("Erro ao carregar comentários", err);
+    });
+});
+
+
+// ENVIO DO COMENTÁRIO
+function enviarComentario() {
+  const nomeInput = document.getElementById("comentario-nome");
+  const textoInput = document.getElementById("comentario-texto");
+  const msg = document.getElementById("msg-envio");
+
+  if (!nomeInput || !textoInput || !msg) return;
+
+  const nome = nomeInput.value.trim();
+  const texto = textoInput.value.trim();
+
+  if (!nome || !texto) {
+    msg.style.color = "red";
+    msg.innerText = "Preencha nome e comentário.";
+    return;
+  }
+
+  // 🔗 URL do Google Form (ACTION)
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLjsNvU-_wPDDlG1NYIFW15hFk-iMsmZ0ZKE2C2aZ4u2roug/formResponse?usp=header";
+
+  const data = new FormData();
+  data.append("entry.682521495", nome);      // ID do campo Nome
+  data.append("entry.992915316", texto);     // ID do campo Comentário
+
+  fetch(FORM_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
+
+  msg.style.color = "green";
+  msg.innerText = "Comentário enviado. Obrigado!";
+
+  nomeInput.value = "";
+  textoInput.value = "";
+}
+
+
+
+
