@@ -1,14 +1,7 @@
-/* RESET */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
 body {
-  display: flex;
-  flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
 }
 
 /* ================= HEADER ================= */
@@ -47,636 +40,254 @@ a {
   text-decoration: underline;
 }
 
-/* ================= HERO ================= */
-.hero {
-  position: relative;
-  min-height: 520px;
-  background-image: url("img/banner-home.png");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.imoveis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 30px;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  width: 100%;
-  padding: 0 20px;
-  text-align: center;
-  color: white;
-}
-
-.hero-content h1 {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
-}
-
-.hero-content p {
-  font-size: 20px;
-  margin-bottom: 30px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-}
-
-/* BUSCA */
-.busca {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.busca input {
-  padding: 14px;
-  border-radius: 8px;
-  border: none;
-  width: 200px;
-}
-
-.busca button {
-  padding: 14px 24px;
-  border-radius: 8px;
-  border: none;
-  background: #1f7a4f;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.busca button:hover {
-  background: #16613e;
-}
-
-/* ================= SEÇÕES ================= */
-.secao,
-.secao-imobiliarias {
-  padding: 60px 8%;
-}
-
-.secao-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.secao-header h2 {
-  font-size: 26px;
-}
-
-.ver-todos {
-  background: #1f7a4f;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.ver-todos:hover {
-  background: #16613e;
-}
-
-/* ================= CARROSSEL ================= */
-.carrossel {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 10px 0;
-}
-
-.carrossel::-webkit-scrollbar {
-  display: none;
-}
-
-/* ================= IMÓVEIS ================= */
-.card-imovel {
-  background: white;
-  min-width: 260px;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-.card-imovel img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.card-imovel h3 {
-  font-size: 16px;
-  margin: 8px 0;
-}
-
-.card-imovel span {
-  font-weight: bold;
-  color: #1f7a4f;
-}
-
-/* ================= IMOBILIÁRIAS ================= */
-.secao-imobiliarias {
-  background: #f7f7f7;
-}
-
-.carrossel-wrapper {
-  position: relative;
-}
-
-.card-imobiliaria {
-  min-width: 220px;
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.card-imobiliaria:hover {
-  transform: translateY(-5px);
-}
-
-.card-imobiliaria img {
-  max-width: 120px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 12px;
-}
-
-.card-imobiliaria h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-}
-
-.card-imobiliaria span {
-  font-size: 14px;
-  color: #666;
+.card {
+    background: white;
+    width: 100%;
+    max-width: 360px;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 
-/* SETAS */
-.seta {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: white;
-  border: none;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
-.seta.esquerda { left: -20px; }
-.seta.direita { right: -20px; }
 
-/* ================= CORRETORES ================= */
-.card-corretor {
-  background: white;
-  width: 220px;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+.card a {
+    display: block;
+    background: #25d366;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
 }
 
-.card-corretor img {
-  width: 100%;
-  border-radius: 50%;
+.modal-content select,
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
 }
 
-/* ================= SOBRE ================= */
-.sobre {
-  background: white;
-  padding: 20px 8%;
+.modal-content button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background: #1f7a4f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.diferenciais {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-  flex-wrap: wrap;
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
 }
 
-/* ================= COMENTÁRIOS ================= */
-.comentarios {
-  padding: 40px 8%;
-  background: #eef2ef;
+.modal-content {
+    background: rgba(255,255,255,0.8); /* branco transparente */
+    padding: 25px;
+    width: 90%;
+    max-width: 420px;
+    border-radius: 12px;
+    text-align: center;
 }
 
-.comentarios input,
-.comentarios textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+.options {
+    display: grid;
+    gap: 10px;
+    margin-top: 15px;
 }
+
+.options button,
+#btnProximo {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #1f7a4f;
+    color: white;
+    cursor: pointer;
+}
+
+.options button:hover {
+    background: #16603e;
+}
+
+#btnProximo:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+#campos-filtros input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+#campos-filtros select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+#filtros-ativos {
+    padding: 15px 30px;
+    background: #eef5f1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    min-height: 52px;
+}
+
+
+
+
+
+#alterar-filtros {
+    background: transparent;
+    border: 2px solid #1f7a4f;
+    color: #1f7a4f;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#ordenacao {
+    padding: 0 30px 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#ordenacao span {
+    font-weight: bold;
+}
+
+#ordenacao button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #1f7a4f;
+    background: white;
+    color: #1f7a4f;
+    cursor: pointer;
+}
+
+#ordenacao button:hover {
+    background: #1f7a4f;
+    color: white;
+}
+
+#limpar-tudo {
+    background: #b00020;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#limpar-tudo:hover {
+    background: #8c0019;
+}
+
+@media (max-width: 600px) {
+
+    .modal-content {
+        width: 95%;
+        max-width: none;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    .options button,
+    #btnProximo,
+    .modal-content button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+#alterar-tipo {
+    background: transparent;
+    border: 2px solid #1f7a4f;
+    color: #1f7a4f;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#filtros-ativos button {
+    white-space: nowrap;
+}
+
+.filtro-botoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.filtro-botoes button {
+    padding: 10px 14px;
+    border-radius: 20px;
+    border: 1px solid #1f7a4f;
+    background: white;
+    color: #1f7a4f;
+    cursor: pointer;
+}
+
+.filtro-botoes button.ativo {
+    background: #1f7a4f;
+    color: white;
+}
+
+.filtro-botoes button {
+    min-width: 90px;
+    text-align: center;
+}
+
+/* botão de ordenação ativo */
+#ordenacao button.ativo {
+    background: #1f7a4f;
+    color: white;
+    border-color: #1f7a4f;
+}
+
+
+
+
 
 /* ================= FOOTER ================= */
 .footer {
-  background: #1f7a4f;
-  color: #fff;
+  padding: 20px;
   text-align: center;
-  padding: 12px;
-  font-size: 14px;
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 768px) {
-
-  .header {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-  }
-
-  .menu {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .hero {
-    min-height: 420px;
-  }
-
-  .hero-content h1 {
-    font-size: 30px;
-  }
-
-  .hero-content p {
-    font-size: 16px;
-  }
-
-  .busca {
-    flex-direction: column;
-  }
-
-  .busca input,
-  .busca button {
-    width: 100%;
-  }
-
-  .secao,
-  .secao-imobiliarias,
-  .sobre,
-  .comentarios {
-    padding: 40px 20px;
-  }
-
-  .secao-header {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .seta.esquerda { left: -10px; }
-  .seta.direita { right: -10px; }
-}
-/* MODAL */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-
-
-@keyframes aparecer {
-  from { transform: scale(.9); opacity: 0 }
-  to { transform: scale(1); opacity: 1 }
-}
-
-
-
-
-
-
-
-/* MODAL BASE */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;            /* começa fechado */
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-/* CONTEÚDO DO MODAL */
-.modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 420px;
-  text-align: center;
-  position: relative;
-  animation: aparecer .2s ease;
-}
-
-/* BOTÃO FECHAR */
-.fechar-modal {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* LOGO */
-.modal-logo {
-  max-width: 140px;
-  max-height: 80px;
-  object-fit: contain;
-  margin-bottom: 15px;
-}
-
-/* CONTATOS */
-.linha-contatos {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.linha-contatos a {
-  font-size: 18px;
-  text-decoration: none;
-}
-
-.contato-item {
-  font-size: 16px;
-  padding: 8px 12px;
-  background: #f2f2f2;
-  border-radius: 8px;
-  min-width: 200px;
-}
-
-.contato-link {
-
-  font-size: 16px;
-  padding: 8px 12px;
-  background: #1f7a4f;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 200;
-}
-
-.contato-link:hover {
-  background: #16613e;
-}
-
-
-.card-corretor {
-  min-width: 220px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.card-corretor:hover {
-  transform: translateY(-5px);
-}
-
-.card-corretor img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.card-corretor h4 {
-  margin: 6px 0;
-}
-
-.card-corretor span {
-  font-size: 14px;
-  color: #666;
-}
-
-@media (max-width: 768px) {
-  .carrossel {
-    padding-left: 10px;
-  }
-  .carrossel-wrapper {
-  position: relative;
-}
-
-/* SETAS */
-.seta {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #ffffff;
-  border: none;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 26px;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-  z-index: 5;
-}
-
-.seta.esquerda {
-  left: -20px;
-}
-
-.seta.direita {
-  right: -20px;
-}
-
-.seta:hover {
   background: #1f7a4f;
   color: white;
 }
-
-}
-
-.card-imovel {
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card-imovel:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.campo-autocomplete {
-  position: relative;
-}
-
-.lista-autocomplete {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #1f7a4f;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  list-style: none;
-  padding: 6px 0;
-  margin: 6px 0 0;
-  max-height: 220px;
-  overflow-y: auto;
-  z-index: 10;
-  display: none;
-}
-
-.lista-autocomplete li {
-  padding: 10px 14px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.lista-autocomplete li:hover {
-  background: #1f7a4f;
-  color: black;
-}
-.linha-contatos {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 16px;
-}
-
-.contato-btn {
-  background: #1f7a4f;
-  color: white;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 14px;
-  text-decoration: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  max-width: auto;
-}
-
-.contato-btn:hover {
-  background: #16613e;
-}
-
-
-#modal-nome {
-  font-size: 20px;
-  margin: 6px 0;
-}
-
-#modal-cidade {
-  font-size: 14px;
-  color: #666;
-}
-@media (max-width: 480px) {
-  .modal-content {
-    padding: 20px;
-  }
-
-  .linha-contatos {
-    flex-direction: column;
-  }
-
-  .contato-btn {
-    justify-content: center;
-    width: 100%;
-  }
-}
-
-/*##########MENTARIO*/
-.comentarios-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-}
-
-.comentario-form input,
-.comentario-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.comentario-form button {
-  background: #1f7a4f;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.msg-envio {
-  margin-top: 10px;
-  font-size: 14px;
-  color: green;
-}
-
-/* Comentários aprovados */
-.comentario-item {
-  background: white;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-.comentario-item strong {
-  display: block;
-  margin-bottom: 6px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .comentarios-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-
-
-
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-

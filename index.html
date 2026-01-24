@@ -1,111 +1,184 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imovel Ideal</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Facilita Imóvel</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- TOPO -->
+
+<!-- TOPO -->
  <header class="header">
    <a href="home.html"><div class="logo">Facilita Imóvel</div></a>
     <nav class="menu">
-      <a href="index.html">Imóveis</a>
+      <!--href="home.html"--><a>Imóveis</a><!--era index-->
       <a href="imobiliarias.html">Imobiliárias</a>
       <a href="corretores.html">Corretores</a>
       <a href="contato.html">Contato</a>
     </nav>
 </header>
 
-    <div id="filtros-ativos"></div><!--Alterar tipo, alterar filtro e limpar tudo, criado em JS-->
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Encontre o imóvel dos seus sonhos</h1>
+    <p>Casas, apartamentos e lotes em Itaúna</p>
 
-    <div id="ordenacao"> <!--criado botao de ordenação, funçao em JS-->
-        <span>Ordenar por:</span>
-        <button id="ord-preco" onclick="alternarOrdenacao('preco')">Preço -</button>
-        <button id="ord-tamanho" onclick="alternarOrdenacao('tamanho')">Tamanho -</button>
+    <div class="busca">
+      <input placeholder="Tipo">
+      <div class="campo-autocomplete">
+        <input
+          type="text"
+          id="input-bairro"
+          placeholder="Bairro"
+          autocomplete="off"
+        >
+        <ul id="lista-bairros" class="lista-autocomplete"></ul>
+      </div>
+
+      <button>Buscar</button>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre">
+<h2>Por que criamos este site?</h2>
+
+<p>Para reunir imobiliárias, corretores e imóveis em um único lugar e facilitar a busca pelo seu sonho.
+O Facilita Imóvel apenas divulga informações e conecta você aos profissionais — não realizamos trâmites ou negociações.
+  <strong>Sua participação é muito importante.</strong><br>
+  Deixe seu comentário dizendo o que achou do site e, se conhecer outros corretores
+  ou imobiliárias, fique à vontade para indicar.
+  Assim, o Facilita Imóvel cresce e ajuda cada vez mais pessoas.
+</p>
+<p>O site esta apenas no inicio</p>
+
+</section>
+
+
+<!-- CARROSSEL IMÓVEIS -->
+<section class="secao ">
+  <div class="secao-header">
+    <h2>Imóveis em destaque</h2>
+    <!--<a href="home.html" class="ver-todos">Ver todos</a> era index-->
+  </div>
+  
+
+  <div class="carrossel-wrapper">
+    <!--<button class="seta esquerda" onclick="scrollImoveis(-1)">‹</button>-->
+
+    <!--<div class="carrossel" id="carrossel-destaque">-->
+    <H3>EM BREVE</H3>
+      <!--carrossel js-->
     </div>
 
-    <main class="imoveis" id="lista-imoveis"> <!--Lista de imoveis criada em JS-->
-    </main>
+    <!--<button class="seta direita" onclick="scrollImoveis(1)">›</button>-->
+  </div>
 
-<div id="modal" class="modal" onclick="fecharModal()"> <!--Moda janela flutuante-->
-    <div class="modal-content" onclick="event.stopPropagation()"><!--container do modal-->
+</section>
 
-        <div id="intro-texto">
-            <h2>Olá 👋</h2>
-            <p>
-                Aqui você encontra IMOVEL que não existem em outros sites.<br>
-                Nosso IDEAL é facilitar e ajudar no seu sonho.<br>
-                Apenas divulgamos as opções.
-            </p>
-        </div>
+<!-- IMOBILIÁRIAS -->
+<section class="secao-imobiliarias">
+  <div class="secao-header">
+    <h2>Imobiliárias parceiras</h2>
+    <a href="imobiliarias.html" class="ver-todos">Ver todas</a>
+  </div>
 
-        <p id="contador-disponiveis" style="margin-top:10px; font-weight:bold;">
-            0 imovel para vizualizar
-        </p>
+  <div class="carrossel-wrapper">
+    <button class="seta esquerda" onclick="scrollImobiliarias(-1)">‹</button>
 
-
-        <!-- ETAPA 1 -->
-        <div id="step1">
-            <p><strong>O que você está procurando?</strong></p>
-
-            <div class="options">
-                <button onclick="selectTipo('lote')">Lote</button>
-                <button onclick="selectTipo('casa')">Casa</button>
-                <button onclick="selectTipo('apartamento')">Apartamento</button>
-                <!--<button onclick="selectTipo('olhando')">Só olhando</button> -----alterado para-->
-                <button id="btn-so-olhando" onclick="selectTipo('olhando')">Só olhando</button>
-
-            </div>
-        </div>
-
-        <!-- ETAPA 2 -->
-        <div id="step2" style="display:none;">
-            <p><strong>Deseja usar filtros de pesquisa?</strong></p>
-            <div class="options">
-                <button onclick="mostrarFiltros()">Sim</button>
-                <button onclick="fecharModal()">Não</button>
-            </div>
-        </div>
-
-        <!-- ETAPA 3 -->
-        <div id="step3" style="display:none;">
-            <p><strong>Quais filtros deseja usar?</strong></p>
-
-            <div id="selecao-filtros" class="filtro-botoes">
-                <button data-filtro="bairro">Bairro</button>
-                <button data-filtro="valorMin">Valor mínimo</button>
-                <button data-filtro="valorMax">Valor máximo</button>
-                <button data-filtro="tamanho">Tamanho</button>
-            </div>
-
-            <button id="btnProximo" disabled onclick="irParaCampos()">Próximo</button>
-        </div>
-
-
-        <!-- ETAPA 4 -->
-        <div id="step4" style="display:none;">
-            <p><strong>Preencha os filtros escolhidos</strong></p>
-
-            <div id="campos-filtros"></div>
-
-            <button onclick="aplicarFiltros()">Aplicar filtros</button>
-        </div>
-
-
+    <div class="carrossel" id="carrossel-imobiliarias">
+      <!-- JS insere aqui -->
     </div>
+
+    <button class="seta direita" onclick="scrollImobiliarias(1)">›</button>
+  </div>
+</section>
+
+
+<!-- CORRETORES -->
+<section class="secao">
+  <div class="secao-header">
+    <h2>Corretores de imóveis</h2>
+    <a href="corretores.html" class="ver-todos">Ver todos</a>
+  </div>
+
+  <div class="carrossel-wrapper">
+    <button class="seta esquerda" onclick="scrollCorretores(-1)">‹</button>
+
+    <div class="carrossel" id="carrossel-corretores">
+      <!-- JS insere aqui -->
+    </div>
+
+    <button class="seta direita" onclick="scrollCorretores(1)">›</button>
+  </div>
+</section>
+
+
+
+<!-- COMENTÁRIOS -->
+<section class="comentarios">
+  <div class="comentarios-grid">
+
+    <!-- FORMULÁRIO -->
+    <div class="comentario-form">
+      <h2>Deixe seu comentário</h2>
+
+      <input id="comentario-nome" placeholder="Seu nome">
+      <textarea id="comentario-texto" placeholder="Escreva seu comentário"></textarea>
+
+      <button onclick="enviarComentario()">Enviar comentário</button>
+
+      <p id="msg-envio" class="msg-envio"></p>
+    </div>
+
+    <!-- COMENTÁRIOS APROVADOS -->
+    <div class="comentarios-aprovados">
+      <h2>O que as pessoas estão dizendo</h2>
+
+      <div id="lista-comentarios">
+        <!-- JS preenche -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL IMOBILIÁRIA -->
+<div id="modal-imobiliaria" class="modal" onclick="fecharModalImobiliaria()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+
+    <button class="fechar-modal" onclick="fecharModalImobiliaria()">×</button>
+
+    <img id="modal-logo" class="modal-logo">
+
+    <h2 id="modal-nome"></h2>
+    <p id="modal-cidade"></p>
+
+    <div id="modal-contatos" class="linha-contatos"></div>
+
+  </div>
+</div>
+<!--MODAL CORRETOI-->
+<div id="modal-corretor" class="modal" onclick="fecharModalCorretor()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+
+    <button class="fechar-modal" onclick="fecharModalCorretor()">×</button>
+
+    <img id="modal-corretor-foto" class="modal-logo">
+
+    <h2 id="modal-corretor-nome"></h2>
+    <p id="modal-corretor-cidade"></p>
+
+    <div id="modal-corretor-contatos" class="linha-contatos"></div>
+
+  </div>
 </div>
 
 
-<!-- MODAL DE AVISO -->
-<div id="modal-aviso" class="modal" style="display:none;" onclick="fecharModalAviso()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <h3>Nenhum imóvel encontrado 😕</h3>
-        <p>Tente alterar o tipo ou os filtros.</p>
-        <button onclick="confirmarNenhumImovel()">OK</button>
-    </div>
-</div>
+
+
 
 
 <footer class="footer">
@@ -114,11 +187,10 @@
 
 <script src="dados.js"></script>
 <script src="imoveis.js"></script>
+<script src="corretores.js"></script>
+<script src="comentarios.js"></script>
+<script src="imobiliarias.js"></script>
 <script src="script.js"></script>
 
-
 </body>
-
-
-
 </html>

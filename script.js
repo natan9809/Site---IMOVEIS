@@ -1,477 +1,355 @@
-let filtrosAtivos = {};
-let tipoSelecionado = "";
-let ordenacaoAtual = { campo: null, direcao: null };
-let modoAlterarTipo = false;
-let avisoAberto = false;
-let imoveis = IMOVEIS;
+const containerImobiliarias = document.getElementById("carrossel-imobiliarias");
+console.log("home.js iniciou");
 
+IMOBILIARIAS.forEach(imob => {
+  const card = document.createElement("div");
+  card.className = "card-imobiliaria";
 
-window.onload = () => { // Inicialização segura da aplicação
+  card.innerHTML = `
+    <img src="${imob.logo}" alt="${imob.nome}">
+    <h3>${imob.nome}</h3>
+    <span>${imob.cidade}</span>
+  `;
 
-    // restaura estado salvo (se existir)
-    const estadoSalvo = localStorage.getItem("estadoFiltro");
-    if (estadoSalvo) {
-        const estado = JSON.parse(estadoSalvo);
-        tipoSelecionado = estado.tipoSelecionado;
-        filtrosAtivos = estado.filtrosAtivos;
-        ordenacaoAtual = estado.ordenacaoAtual;
-    }
+  // 🔥 CLIQUE NO CARD
+  card.addEventListener("click", () => {
+    abrirModalImobiliaria(imob);
+  });
 
-    atualizarTela()
+  containerImobiliarias.appendChild(card);
+});
 
-    const voltarSemModal = localStorage.getItem("voltarSemModal");
+function abrirModalImobiliaria(imob) {
+  document.getElementById("modal-logo").src = imob.logo;
+  document.getElementById("modal-nome").innerText = imob.nome;
+  document.getElementById("modal-cidade").innerText = imob.cidade;
 
-    if (voltarSemModal === "true" || tipoSelecionado || filtrosAtivos)  {
-        // NÃO abre modal
-        localStorage.removeItem("voltarSemModal");
-        fecharModal();
-    } else {
+  const contatos = document.getElementById("modal-contatos");
+  contatos.innerHTML = "";
 
-        document.getElementById("modal").style.display = "flex";
-        document.getElementById("step1").style.display = "block";
-        document.getElementById("step2").style.display = "none";
-        document.getElementById("step3").style.display = "none";
-        document.getElementById("step4").style.display = "none";
-        document.getElementById("btn-so-olhando").style.display = "block";
-    }
-};
+imob.contatos.forEach(c => {
 
-function proximaPergunta() {
-    const tipo = document.getElementById("tipo-imovel").value;
-
-    if (!tipo) {
-        alert("Selecione uma opção");
-        return;
-    }
-
-    document.getElementById("pergunta1").style.display = "none";
-
-    if (tipo === "olhando") {
-        fecharModal();
-    } else {
-        document.getElementById("pergunta2").style.display = "block";
-    }
-}
-
-function selectTipo(tipo) {
-    tipoSelecionado = tipo;
-
-    // some o texto institucional
-    document.getElementById("intro-texto").style.display = "none";
-
-    // Se estiver alterando tipo, troca direto
-    if (modoAlterarTipo) {
-        modoAlterarTipo = false;
-        fecharModal();
-        atualizarTela();
-        return;
-    }
-
-    document.getElementById("step1").style.display = "none";
-
-    if (tipo === "olhando") {
-        fecharModal();
-    } else {
-        document.getElementById("step2").style.display = "block";
-    }
-    atualizarContador();
-
-}
-
-function mostrarFiltros() {
-    document.getElementById("step2").style.display = "none";
-    document.getElementById("step3").style.display = "block";
-
-    ativarSelecaoFiltros();
-}
-
-function fecharModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
-function irParaCampos() {
-    document.getElementById("step3").style.display = "none";
-    document.getElementById("step4").style.display = "block";
-
-    const container = document.getElementById("campos-filtros");
-    container.innerHTML = "";
-
-    document.querySelectorAll("#selecao-filtros button.ativo").forEach(botao => {
-        const filtro = botao.dataset.filtro;
-
-        // BAIRRO
-        if (filtro === "bairro") {
-
-            let opcoesBairro = `<option value="">Selecione</option>`;
-
-            BAIRROS.forEach(bairro => {
-                opcoesBairro += `<option value="${bairro}">${bairro}</option>`;
-            });
-
-            container.innerHTML += `
-                <label><strong>Bairro</strong></label>
-                <select id="filtro-bairro">
-                    ${opcoesBairro}
-                </select>
-            `;
-        }
-
-        // VALOR MIN
-        if (filtro === "valorMin") {
-                container.innerHTML += `
-                    <label><strong>Valor mínimo</strong></label>
-                    <input type="number" id="filtro-min" placeholder="Ex: 100000">
-                `;
-            }
-
-        // VALOR MAX
-        if (filtro === "valorMax") {
-                container.innerHTML += `
-                    <label><strong>Valor máximo</strong></label>
-                    <input type="number" id="filtro-max" placeholder="Ex: 300000">
-                `;
-            }
-
-        // TAMANHO
-        if (filtro === "tamanho") {
-                container.innerHTML += `
-                    <label><strong>Tamanho mínimo (m²)</strong></label>
-                    <input type="number" id="filtro-tamanho" placeholder="Ex: 200">
-                `;
-            }
-    });
-
-    setTimeout(() => {
-        document.querySelectorAll("#campos-filtros input, #campos-filtros select")
-            .forEach(el => {
-                el.addEventListener("input", () => {
-                    filtrosAtivos.bairro = document.getElementById("filtro-bairro")?.value || null;
-                    filtrosAtivos.valorMin = document.getElementById("filtro-min")?.value || null;
-                    filtrosAtivos.valorMax = document.getElementById("filtro-max")?.value || null;
-                    filtrosAtivos.tamanho = document.getElementById("filtro-tamanho")?.value || null;
-
-                    atualizarContador();
-                });
-            });
-    }, 0);
-
-
-    ativarEventosBotoesFiltro();
-}
-
-function aplicarFiltros() {
-    filtrosAtivos = {
-        bairro: document.getElementById("filtro-bairro")?.value || null,
-        valorMin: document.getElementById("filtro-min")?.value || null,
-        valorMax: document.getElementById("filtro-max")?.value || null,
-        tamanho: document.getElementById("filtro-tamanho")?.value || null
-    };
-
-    const resultado = imoveis.filter(imovel => {
-        if (tipoSelecionado && imovel.tipo !== tipoSelecionado) return false;
-        if (filtrosAtivos.bairro && imovel.bairro !== filtrosAtivos.bairro) return false;
-        if (filtrosAtivos.valorMin && imovel.preco < filtrosAtivos.valorMin) return false;
-        if (filtrosAtivos.valorMax && imovel.preco > filtrosAtivos.valorMax) return false;
-        if (filtrosAtivos.tamanho && imovel.tamanho < filtrosAtivos.tamanho) return false;
-        return true;
-    });
-
-    // ❗ SE NÃO HÁ RESULTADOS
-    if (resultado.length === 0) {
-        fecharModal();
-        mostrarModalNenhumImovel();
-        return;
-    }
-
-    atualizarTela();
-    fecharModal();
-}
-
-function renderizarImoveis(listaImoveis) {
-    const lista = document.getElementById("lista-imoveis");
-    lista.innerHTML = "";
-
-    if (listaImoveis.length === 0) {
-        mostrarModalNenhumImovel();
-        return;
-    }
-
-    listaImoveis.forEach(imovel => {
-        lista.innerHTML += `
-        
-            <div class="card" onclick="abrirImovel(${imovel.id})">
-                <img src="${imovel.imagem}">
-                <h2>${imovel.tipo.toUpperCase()} no Bairro ${imovel.bairro}</h2>
-                <p>📐 ${imovel.tamanho} m²</p>
-                <p>💰 R$ ${imovel.preco.toLocaleString("pt-BR")}</p>
-                
-            </div>
-        `;
-    });
-}
-
-function mostrarFiltrosAtivos() {
-    const area = document.getElementById("filtros-ativos");
-    area.innerHTML = "";
-
-    // A barra SEMPRE visível
-    area.style.display = "flex";
-
-    // Botões SEMPRE presentes
-    area.innerHTML += `
-        <button id="alterar-tipo" onclick="abrirAlterarTipo()">Alterar tipo</button>
-        <button id="alterar-filtros" onclick="abrirAlterarFiltros()">Alterar filtros</button>
-        <button id="limpar-tudo" onclick="limparTudo()">Limpar tudo</button>
+  if (c.tipo === "whatsapp") {
+    contatos.innerHTML += `
+      <a class="contato-btn">
+        📱 ${c.valor}
+      </a>
     `;
+  }
+
+  if (c.tipo === "telefone") {
+    contatos.innerHTML += `
+      <a class="contato-btn">
+        ☎️ ${c.valor}
+      </a>
+    `;
+  }
+
+  if (c.tipo === "site") {
+    contatos.innerHTML += `
+      <a class="contato-btn"
+         href="${c.valor.startsWith('http') ? c.valor : 'https://' + c.valor}"
+         target="_blank"
+         rel="noopener noreferrer">
+        🌐 Site
+      </a>
+    `;
+  }
+  
+
+});
+
+
+  document.getElementById("modal-imobiliaria").style.display = "flex";
 }
 
-function removerFiltro(chave) { // NÃO chamar render direto, usar atualizarTela()
-    filtrosAtivos[chave] = null;
-    atualizarTela();
+function fecharModalImobiliaria() {
+  document.getElementById("modal-imobiliaria").style.display = "none";
 }
 
-function abrirAlterarFiltros() { //ALTERAR FILTROS
-    modoAlterarTipo = true;
 
-    const modal = document.getElementById("modal");
-    modal.style.display = "flex";
+console.log("MODAL");
+const containerCorretores = document.getElementById("carrossel-corretores");
 
-    // MOSTRA o texto novamente
-    document.getElementById("intro-texto").style.display = "block"
+CORRETORES.forEach(corretor => {
+  const card = document.createElement("div");
+  card.className = "card-corretor";
 
-    document.getElementById("step1").style.display = "none";
-    document.getElementById("step2").style.display = "none";
-    document.getElementById("step3").style.display = "block";
-    document.getElementById("step4").style.display = "none";
+  card.innerHTML = `
+    <img src="${corretor.foto}">
+    <h4>${corretor.nome}</h4>
+    <span>${corretor.cidade}</span>
+  `;
+
+  card.onclick = () => abrirModalCorretor(corretor);
+
+  containerCorretores.appendChild(card);
+});
+
+function abrirModalCorretor(corretor) {
+  document.getElementById("modal-corretor-foto").src = corretor.foto;
+  document.getElementById("modal-corretor-nome").innerText = corretor.nome;
+  document.getElementById("modal-corretor-cidade").innerText = corretor.cidade;
+
+  const contatos = document.getElementById("modal-corretor-contatos");
+contatos.innerHTML = "";
+
+corretor.contatos.forEach(c => {
+
+  if (c.tipo === "telefone") {
+    contatos.innerHTML += `
+      <a class="contato-btn">
+        ☎️ ${c.valor}
+      </a>
+    `;
+  }
+  
+
+  if (c.tipo === "whatsapp") {
+    contatos.innerHTML += `
+      <a class="contato-btn">
+        📱 ${c.valor}
+      </a>
+    `;
+  }
+
+  if (c.tipo === "site") {
+    contatos.innerHTML += `
+      <a class="contato-btn"
+         href="${c.valor.startsWith('http') ? c.valor : 'https://' + c.valor}"
+         target="_blank"
+         rel="noopener noreferrer">
+        🌐 Site
+      </a>
+    `;
+  }
+
+});
 
 
-
-    /// 🔹 garante múltipla seleção funcionando
-    const botoes = document.querySelectorAll("#selecao-filtros button");
-    const botaoProximo = document.getElementById("btnProximo");
-
-    let algumAtivo = false;
-
-    botoes.forEach(btn => {
-        btn.classList.remove("ativo"); // limpa visual
-
-        btn.onclick = () => {
-            btn.classList.toggle("ativo");
-
-            algumAtivo = [...botoes].some(b =>
-                b.classList.contains("ativo")
-            );
-
-            botaoProximo.disabled = !algumAtivo;
-        };
-    });
-    botaoProximo.disabled = true;
-
-    atualizarContador();
-
+  document.getElementById("modal-corretor").style.display = "flex";
 }
 
-function ordenar(campo, direcao) {
-    ordenacaoAtual = { campo, direcao };
-    atualizarTela();
+
+console.log("CORRETORES");
+
+
+function fecharModalCorretor() {
+  document.getElementById("modal-corretor").style.display = "none";
 }
 
-function limparTudo() { //DEVE LIMPRAR O FILTRO E ORDANAÇÃO
-     filtrosAtivos = {
-        bairro: null,
-        valorMin: null,
-        valorMax: null,
-        tamanho: null
+console.log("SCROLL");
+
+function scrollCorretores(dir) {
+  containerCorretores.scrollBy({
+    left: dir * 260,
+    behavior: "smooth"
+  });
+}
+console.log("scrolcorretores")
+function scrollImobiliarias(dir) {
+  containerImobiliarias.scrollBy({
+    left: dir * 260,
+    behavior: "smooth"
+  });
+}
+console.log("scrrolimobiliaria")
+const containerDestaque = document.getElementById("carrossel-destaque");
+
+console.log("ANTES DE FILTRAR");
+// filtra apenas imóveis em destaque
+const imoveisDestaque = IMOVEIS.filter(im => im.destaque === true);
+console.log("filtra imoveis");
+
+// fallback: se não tiver destaque, pega os últimos
+const listaFinal = imoveisDestaque.length > 0
+  ? imoveisDestaque
+  : IMOVEIS.slice(-6);
+console.log("pegar os ultimos");
+
+if (containerDestaque) {
+  listaFinal.forEach(imovel => {
+    const card = document.createElement("div");
+    card.className = "card-imovel";
+
+    card.innerHTML = `
+      <img src="${imovel.imagem}">
+      <h3>${imovel.tipo.toUpperCase()} – ${imovel.bairro}</h3>
+      <span>R$ ${imovel.preco.toLocaleString("pt-BR")}</span>
+    `;
+
+    card.onclick = () => {
+      window.location.href = `imovel.html?id=${imovel.id}`;
     };
 
-    tipoSelecionado = null;
-    ordenacaoAtual = { campo: null, direcao: null };
-
-    // remove visual ativo dos botões
-    document.querySelectorAll(".filtro-botoes button").forEach(btn => {
-        btn.classList.remove("ativo");
-    });
-
-    atualizarTela();
-    atualizarTextoOrdenacao();
+    containerDestaque.appendChild(card);
+  });
 }
 
-function atualizarTela() {
-    let resultado = imoveis.filter(imovel => {
 
-        if (tipoSelecionado && imovel.tipo !== tipoSelecionado) return false;
-        if (filtrosAtivos.bairro && imovel.bairro !== filtrosAtivos.bairro) return false;
-        if (filtrosAtivos.valorMin && imovel.preco < filtrosAtivos.valorMin) return false;
-        if (filtrosAtivos.valorMax && imovel.preco > filtrosAtivos.valorMax) return false;
-        if (filtrosAtivos.tamanho && imovel.tamanho < filtrosAtivos.tamanho) return false;
 
-        return true;
-    });
+console.log("FILTRAR");
+function scrollImoveis(direcao) {
+  const carrossel = document.getElementById("carrossel-destaque");
 
-    if (ordenacaoAtual.campo) {
-        resultado.sort((a, b) =>
-            ordenacaoAtual.direcao === "asc"
-                ? a[ordenacaoAtual.campo] - b[ordenacaoAtual.campo]
-                : b[ordenacaoAtual.campo] - a[ordenacaoAtual.campo]
-        );
-    }
-
-    renderizarImoveis(resultado);
-
-    if (resultado.length > 0) {
-        mostrarFiltrosAtivos();
-    } else {
-        esconderFiltrosAtivos();
-    }
-
-    atualizarContador();
-
-}
-
-function abrirAlterarTipo() { // OBS: Alterar tipo pelo 
-    modoAlterarTipo = true;
-
-    const modal = document.getElementById("modal");
-    modal.style.display = "flex";
-
-    document.getElementById("step1").style.display = "block";
-    document.getElementById("step2").style.display = "none";
-    document.getElementById("step3").style.display = "none";
-    document.getElementById("step4").style.display = "none";
-    document.getElementById("btn-so-olhando").style.display = "none";//ESCONDE "Só olhando" ao alterar tipo
-
-    atualizarContador();
-
-}
-
-function fecharModalAviso() {
-    avisoAberto = false;
-    document.getElementById("modal-aviso").style.display = "none";
-}
-
-function mostrarModalNenhumImovel() {
-    // fecha o modal de filtros
-    document.getElementById("modal").style.display = "none";
-
-    // abre o modal de aviso
-    document.getElementById("modal-aviso").style.display = "flex";
-}
-
-function confirmarNenhumImovel() {
-    fecharModalAviso();
-
-    // limpa apenas os filtros
-    filtrosAtivos = {};
-
-    // NÃO limpa o tipo selecionado
-    atualizarTela();
-}
-
-function ativarSelecaoFiltros() {
-    const botoes = document.querySelectorAll("#selecao-filtros button");
-    const botaoProximo = document.getElementById("btnProximo");
-
-    botoes.forEach(btn => {
-        btn.onclick = () => {
-            btn.classList.toggle("ativo");
-
-            const algumAtivo = [...botoes].some(b => b.classList.contains("ativo"));
-            botaoProximo.disabled = !algumAtivo;
-        };
-    });
-}
-
-function alternarOrdenacao(campo) {
-    // Se clicou no mesmo campo → alterna direção
-    if (ordenacaoAtual.campo === campo) {
-        ordenacaoAtual.direcao =
-            ordenacaoAtual.direcao === "desc" ? "asc" : "desc";
-    } else {
-        // Se mudou de campo → começa em desc
-        ordenacaoAtual.campo = campo;
-        ordenacaoAtual.direcao = "desc";
-    }
-
-    atualizarTextoOrdenacao();
-    atualizarTela();
-}
-
-function atualizarTextoOrdenacao() { //para atualizar o texto
-    const btnPreco = document.getElementById("ord-preco");
-    const btnTamanho = document.getElementById("ord-tamanho");
-
-    // limpa estado visual
-    btnPreco.classList.remove("ativo");
-    btnTamanho.classList.remove("ativo");
-
-    // Preço
-    if (ordenacaoAtual.campo === "preco") {
-        btnPreco.innerText =
-            ordenacaoAtual.direcao === "asc" ? "Preço ↑" : "Preço ↓";
-        btnPreco.classList.add("ativo");
-    } else {
-        btnPreco.innerText = "Preço -";
-    }
-
-    // Tamanho
-    if (ordenacaoAtual.campo === "tamanho") {
-        btnTamanho.innerText =
-            ordenacaoAtual.direcao === "asc" ? "Tamanho ↑" : "Tamanho ↓";
-        btnTamanho.classList.add("ativo");
-    } else {
-        btnTamanho.innerText = "Tamanho -";
-    }
-}
-
-function esconderFiltrosAtivos() {
-    const area = document.getElementById("filtros-ativos");
-    area.style.display = "none";
-}
-
-function calcularQuantidadeDisponivel() {
-    return imoveis.filter(imovel => {
-
-        if (tipoSelecionado && imovel.tipo !== tipoSelecionado) return false;
-        if (filtrosAtivos.bairro && imovel.bairro !== filtrosAtivos.bairro) return false;
-        if (filtrosAtivos.valorMin && imovel.preco < filtrosAtivos.valorMin) return false;
-        if (filtrosAtivos.valorMax && imovel.preco > filtrosAtivos.valorMax) return false;
-        if (filtrosAtivos.tamanho && imovel.tamanho < filtrosAtivos.tamanho) return false;
-
-        return true;
-    }).length;
-}
-
-function atualizarContador() {
-    const contador = document.getElementById("contador-disponiveis");
-    if (!contador) return;
-
-    const total = calcularQuantidadeDisponivel();
-
-    contador.innerText =
-        total === 1
-            ? "1 item disponível"
-            : `${total} itens disponíveis`;
-}
-
-function salvarEstado() {
-    localStorage.setItem("estadoFiltro", JSON.stringify({
-        tipoSelecionado,
-        filtrosAtivos,
-        ordenacaoAtual
-    }));
+  carrossel.scrollBy({
+    left: direcao * 280,
+    behavior: "smooth"
+  });
 }
 
 function abrirImovel(id) {
-    salvarEstado();
-    window.location.href = `imovel.html?id=${id}`;
+  window.location.href = `imovel.html?id=${id}`;
 }
 
-function voltar() {
-    localStorage.setItem("voltarSemModal", "true");
-    window.history.back();
+const inputBairro = document.getElementById("input-bairro");
+const listaBairros = document.getElementById("lista-bairros");
+
+inputBairro.addEventListener("input", () => {
+  const texto = inputBairro.value.toLowerCase().trim();
+  listaBairros.innerHTML = "";
+
+  if (texto === "") {
+    listaBairros.style.display = "none";
+    return;
+  }
+
+  const resultados = BAIRROS.filter(bairro =>
+    bairro.toLowerCase().includes(texto)
+  );
+
+  if (resultados.length === 0) {
+    listaBairros.style.display = "none";
+    return;
+  }
+
+  resultados.forEach(bairro => {
+    const li = document.createElement("li");
+    li.textContent = bairro;
+
+    li.onclick = () => {
+      inputBairro.value = bairro;
+      listaBairros.style.display = "none";
+    };
+
+    listaBairros.appendChild(li);
+  });
+
+  listaBairros.style.display = "block";
+});
+
+// Fecha a lista ao clicar fora
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".campo-autocomplete")) {
+    document.querySelectorAll(".lista-autocomplete")
+      .forEach(lista => lista.style.display = "none");
+  }
+});
+
+const inputTipo = document.getElementById("input-tipo");
+const listaTipos = document.getElementById("lista-tipos");
+
+// MOSTRA TODAS AO CLICAR
+if (inputTipo && listaTipos) {
+
+  inputTipo.addEventListener("focus", () => {
+    mostrarTipos("");
+  });
+
+// FILTRA AO DIGITAR
+
+  inputTipo.addEventListener("input", () => {
+    mostrarTipos(inputTipo.value);
+  });
+
+}
+
+function mostrarTipos(filtro) {
+  listaTipos.innerHTML = "";
+
+  const texto = filtro.toLowerCase().trim();
+
+  const resultados = TIPOS.filter(tipo =>
+    tipo.toLowerCase().includes(texto)
+  );
+
+  resultados.forEach(tipo => {
+    const li = document.createElement("li");
+    li.textContent = tipo;
+
+    li.onclick = () => {
+      inputTipo.value = tipo;
+      listaTipos.style.display = "none";
+    };
+
+    listaTipos.appendChild(li);
+  });
+
+  listaTipos.style.display = resultados.length ? "block" : "none";
+}
+
+
+// ================= COMENTÁRIOS (FINAL DO HOME.JS) =================
+window.addEventListener("load", () => {
+  const lista = document.getElementById("lista-comentarios");
+  if (!lista) return;
+
+  fetch("https://script.google.com/macros/s/AKfycbzvM2rgpERf4EIsX6KRy4q55Ss127ltRheMoa0zI4NpvTpIwFbjJKQoFwMsiQW-woieUQ/exec")
+    .then(res => res.json())
+    .then(comentarios => {
+      comentarios.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "comentario-item";
+        div.innerHTML = `
+          <strong>${c.nome}</strong>
+          <p>${c.texto}</p>
+        `;
+        lista.appendChild(div);
+      });
+    })
+    .catch(err => {
+      console.error("Erro ao carregar comentários", err);
+    });
+});
+
+
+// ENVIO DO COMENTÁRIO
+function enviarComentario() {
+  const nomeInput = document.getElementById("comentario-nome");
+  const textoInput = document.getElementById("comentario-texto");
+  const msg = document.getElementById("msg-envio");
+
+  if (!nomeInput || !textoInput || !msg) return;
+
+  const nome = nomeInput.value.trim();
+  const texto = textoInput.value.trim();
+
+  if (!nome || !texto) {
+    msg.style.color = "red";
+    msg.innerText = "Preencha nome e comentário.";
+    return;
+  }
+
+  // 🔗 URL do Google Form (ACTION)
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLjsNvU-_wPDDlG1NYIFW15hFk-iMsmZ0ZKE2C2aZ4u2roug/formResponse?usp=header";
+
+  const data = new FormData();
+  data.append("entry.682521495", nome);      // ID do campo Nome
+  data.append("entry.992915316", texto);     // ID do campo Comentário
+
+  fetch(FORM_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
+
+  msg.style.color = "green";
+  msg.innerText = "Comentário enviado. Obrigado!";
+
+  nomeInput.value = "";
+  textoInput.value = "";
 }
 
 
 
 
-console.log("Site carregado com sucesso!");

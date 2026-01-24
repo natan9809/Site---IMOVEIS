@@ -81,6 +81,7 @@ function abrirModal(imob) {
       icone = "🌐";
       texto = c.valor.replace("https://", "");
     }
+    
 
     div.innerHTML = `
       <span>${icone} ${texto}</span>
