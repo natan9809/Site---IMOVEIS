@@ -258,10 +258,13 @@ a {
 }
 
 .card-corretor img {
-  width: 100%;
-  border-radius: 50%;
-}
+  max-width: 220px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 12px;
 
+  
+}
 /* ================= SOBRE ================= */
 .sobre {
   background: #F7F7F7;

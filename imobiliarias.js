@@ -33,5 +33,26 @@ const IMOBILIARIAS = [
       { tipo: "whatsapp", valor: "(37)998755785 Locação" },
       {tipo: "site", valor: "https://www.legattoimoveis.com.br/"}
     ]
+  },
+    {
+    id: 4,
+    nome: "Morada Administração de Imóveis",
+    logo: "img/imobiliarias/morada.jpg",
+    cidade: "Itaúna",
+    contatos: [
+      { tipo: "whatsapp", valor: "(37)999633600" },
+      {tipo: "site", valor: "https://www.moradaitauna.com.br/"}
+    ]
+  },
+  {
+    id: 5,
+    nome: "EMOBE Empreendimentos Imóbiliarios",
+    logo: "img/imobiliarias/emobe.png",
+    cidade: "Itaúna",
+    contatos: [
+      { tipo: "Telefone", valor: "(37)41010415" },
+      { tipo: "whatsapp", valor: "(37)999251577" },
+      {tipo: "site", valor: "https://www.emobe.com.br/"}
+    ]
   }
 ];
