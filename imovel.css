@@ -14,8 +14,9 @@ body {
 
 .galeria {
     position: relative;
-    background: black;
-    border-radius: 12px;
+    width: 100%;
+    height: 420px;       
+    border-radius: 16px;
     overflow: hidden;
     touch-action: pan-y; /* permite swipe horizontal sem travar scroll */
     
@@ -23,8 +24,10 @@ body {
 
 .galeria img {
     width: 100%;
-    height: 420px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;      /* 🔥 chave: corta sem distorcer */
+    object-position: center;
+    display: block;
 }
 
 .nav {
@@ -127,9 +130,15 @@ body {
   min-width: 240px;
   background: #fff;
   border-radius: 10px;
+  pointer-events: auto;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,.1);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+
+
+
 }
 
 .card-filtro img {

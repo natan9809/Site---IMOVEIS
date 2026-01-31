@@ -53,5 +53,15 @@ const IMOBILIARIAS = [
       { tipo: "whatsapp", valor: "(37)999251577" },
       {tipo: "site", valor: "https://www.emobe.com.br/"}
     ]
+  },
+  {
+    id: 6,
+    nome: "proplar",
+    logo: "img/imobiliarias/proplar.svg",
+    cidade: "Itaúna",
+    contatos: [
+      { tipo: "whatsapp", valor: "(37)999190019" },
+      {tipo: "site", valor: "https://www.proplar.com.br/"}
+    ]
   }
 ];

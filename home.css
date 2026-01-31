@@ -45,9 +45,12 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     padding: 30px;
+    
 }
 
 .card {
+    pointer-events: auto;
+    cursor: pointer;
     background: white;
     width: 100%;
     max-width: 360px;

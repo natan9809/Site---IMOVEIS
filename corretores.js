@@ -70,13 +70,23 @@ const CORRETORES = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     nome: "	Isaac Vasconcelos",
     foto: "img/corretores/isacvasconcelo.jpg",
     cidade: "Itaúna - MG",
     contatos: [
       { tipo: "whatsapp", valor: "(37)991170462" },
       {tipo: "instagram", valor: "isaaccorretor"}
+    ]
+  },
+  {
+    id: 8,
+    nome: "Marcus Salomé",
+    foto: "img/corretores/marcus.png",
+    cidade: "Itaúna - MG",
+    contatos: [
+      { tipo: "whatsapp", valor: "(37)3799467497" },
+      {tipo: "instagram", valor: "marcussalomeconsultor"}
     ]
   }
 ];
