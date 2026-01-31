@@ -16,11 +16,40 @@
 </script> 
 </head>
 <body>
-
-<header class="topo">
-    <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+<!-- TOPO -->
+ <header class="topo">
+    <!-- LADO ESQUERDO -->
+    <div class="topo-esquerda">
+        <a href="index.html" class="logo">Divulga Imóvel</a><!--era home-->
+        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+    </div>
+    <!-- TÍTULO CENTRAL -->
     <h1 id="titulo-imovel"></h1>
+
+    <!-- MENU DIREITA -->
+    <nav id="menu" class="menu">
+        <a href="home.html">Imóveis</a><!--era index-->
+        <a href="imobiliarias.html">Imobiliárias</a>
+        <a href="corretores.html">Corretores</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+    <!-- botão mobile -->
+    <button class="btn-menu" onclick="abrirMenu()">☰</button>
+
 </header>
+    
+<!-- DRAWER (mobile apenas) -->
+<div id="drawer" class="drawer">
+  <button class="fechar-drawer" onclick="fecharMenu()">×</button>
+  <a href="home.html">Imóveis</a>
+  <a href="imobiliarias.html">Imobiliárias</a>
+  <a href="corretores.html">Corretores</a>
+  <a href="contato.html">Contato</a>
+</div>
+
+<div id="overlay" class="overlay" onclick="fecharMenu()"></div>
+
+
 
 <main class="container">
 
@@ -30,6 +59,7 @@
         <img id="imagem-principal">
         <button class="nav next" onclick="proximaImagem()">›</button>
     </section>
+    <div class="miniaturas" id="miniaturas"></div>
 
 
     <!-- DISPONÍVEL EM -->
@@ -60,7 +90,7 @@
         </aside>
 
         
-</div>
+    </div>
 
 
     <!--CARROSEL-->

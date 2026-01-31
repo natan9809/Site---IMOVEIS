@@ -15,7 +15,7 @@ const descricao = document.getElementById("descricao");
 const empresas = document.getElementById("lista-empresas");
 
 // PREENCHE DADOS
-titulo.innerText = `${imovel.tipo.toUpperCase()} – ${imovel.bairro}`;
+titulo.innerText = `${imovel.tipo.toUpperCase()} no Bairro ${imovel.bairro}`;
 img.src = imovel.imagens[0];
 local.innerText = `📍 ${imovel.bairro} - ${imovel.cidade}`;
 tamanho.innerText = `📐 ${imovel.tamanho} m²`;
@@ -26,12 +26,14 @@ descricao.innerText = imovel.descricao || "";
 function proximaImagem() {
     indiceImagem = (indiceImagem + 1) % imovel.imagens.length;
     img.src = imovel.imagens[indiceImagem];
+    atualizarMiniaturas();
 }
 
 function imagemAnterior() {
     indiceImagem =
         (indiceImagem - 1 + imovel.imagens.length) % imovel.imagens.length;
     img.src = imovel.imagens[indiceImagem];
+    atualizarMiniaturas();
 }
 
 // LIMPA LISTA
@@ -141,7 +143,7 @@ function renderizarMeuFiltro(lista) {
       <div class="card-filtro" onclick="abrirImovel(${imovel.id})">
         <img src="${imovel.imagens[0]}">
         <div class="info">
-          <h4>${imovel.tipo.toUpperCase()} — ${imovel.bairro}</h4>
+          <h4>${imovel.tipo.toUpperCase()} no Bairro ${imovel.bairro}</h4>
           <span>R$ ${imovel.preco.toLocaleString("pt-BR")}</span>
         </div>
       </div>
@@ -220,3 +222,81 @@ Imóvel: ${imovel.tipo.toUpperCase()} - ${imovel.bairro} (ID ${imovel.id})
 
 
 
+const miniaturas = document.getElementById("miniaturas");
+
+// gera miniaturas
+function renderizarMiniaturas() {
+  miniaturas.innerHTML = "";
+
+  imovel.imagens.forEach((src, index) => {
+    const imgMini = document.createElement("img");
+    imgMini.src = src;
+
+    if (index === indiceImagem) {
+      imgMini.classList.add("ativa");
+    }
+
+    imgMini.onclick = () => {
+      indiceImagem = index;
+      img.src = imovel.imagens[indiceImagem];
+      atualizarMiniaturas();
+    };
+
+    miniaturas.appendChild(imgMini);
+  });
+}
+
+function atualizarMiniaturas() {
+  document.querySelectorAll(".miniaturas img").forEach((img, i) => {
+    img.classList.toggle("ativa", i === indiceImagem);
+  });
+}
+
+
+///==========MODO SWIPE===============================
+let touchStartX = 0;
+let touchEndX = 0;
+
+const galeria = document.querySelector(".galeria");
+
+// quando toca
+galeria.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+// quando solta
+galeria.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  detectarSwipe();
+});
+
+function detectarSwipe() {
+  const distancia = touchEndX - touchStartX;
+
+  // sensibilidade do swipe (quanto maior, mais difícil)
+  const limite = 50;
+
+  if (distancia > limite) {
+    imagemAnterior(); // swipe para direita
+  }
+
+  if (distancia < -limite) {
+    proximaImagem(); // swipe para esquerda
+  }
+}
+
+function abrirMenu() {
+  document.body.style.overflow = "hidden";
+  document.getElementById("drawer").classList.add("aberto");
+  document.getElementById("overlay").classList.add("ativo");
+}
+
+function fecharMenu() {
+  document.body.style.overflow = "";
+  document.getElementById("drawer").classList.remove("aberto");
+  document.getElementById("overlay").classList.remove("ativo");
+}
+
+
+
+renderizarMiniaturas();

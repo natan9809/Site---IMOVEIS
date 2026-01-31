@@ -29,32 +29,49 @@ function abrirModalImobiliaria(imob) {
 
 imob.contatos.forEach(c => {
 
-  if (c.tipo === "whatsapp") {
-    contatos.innerHTML += `
-      <a class="contato-btn">
-        📱 ${c.valor}
-      </a>
-    `;
-  }
+if (c.tipo === "whatsapp") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="https://wa.me/${c.valor.replace(/\D/g,'')}"
+       target="_blank">
+      <i class="fab fa-whatsapp"></i>
+      ${c.valor}
+    </a>
+  `;
+}
 
-  if (c.tipo === "telefone") {
-    contatos.innerHTML += `
-      <a class="contato-btn">
-        ☎️ ${c.valor}
-      </a>
-    `;
-  }
+if (c.tipo === "telefone") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="tel:${c.valor}">
+      <i class="fas fa-phone"></i>
+      ${c.valor}
+    </a>
+  `;
+}
 
-  if (c.tipo === "site") {
-    contatos.innerHTML += `
-      <a class="contato-btn"
-         href="${c.valor.startsWith('http') ? c.valor : 'https://' + c.valor}"
-         target="_blank"
-         rel="noopener noreferrer">
-        🌐 Site
-      </a>
-    `;
-  }
+if (c.tipo === "site") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="${c.valor.startsWith('http') ? c.valor : 'https://' + c.valor}"
+       target="_blank">
+      <i class="fas fa-globe"></i>
+      Site
+    </a>
+  `;
+}
+
+if (c.tipo === "instagram") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="https://instagram.com/${c.valor.replace('@','')}"
+       target="_blank">
+      <i class="fab fa-instagram"></i>
+      ${c.valor}
+    </a>
+  `;
+}
+
   
 
 });
@@ -96,33 +113,49 @@ contatos.innerHTML = "";
 
 corretor.contatos.forEach(c => {
 
-  if (c.tipo === "telefone") {
-    contatos.innerHTML += `
-      <a class="contato-btn">
-        ☎️ ${c.valor}
-      </a>
-    `;
-  }
-  
+if (c.tipo === "whatsapp") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="https://wa.me/${c.valor.replace(/\D/g,'')}"
+       target="_blank">
+      <i class="fab fa-whatsapp"></i>
+      ${c.valor}
+    </a>
+  `;
+}
 
-  if (c.tipo === "whatsapp") {
-    contatos.innerHTML += `
-      <a class="contato-btn">
-        📱 ${c.valor}
-      </a>
-    `;
-  }
+if (c.tipo === "telefone") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="tel:${c.valor}">
+      <i class="fas fa-phone"></i>
+      ${c.valor}
+    </a>
+  `;
+}
 
-  if (c.tipo === "site") {
-    contatos.innerHTML += `
-      <a class="contato-btn"
-         href="${c.valor.startsWith('http') ? c.valor : 'https://' + c.valor}"
-         target="_blank"
-         rel="noopener noreferrer">
-        🌐 Site
-      </a>
-    `;
-  }
+if (c.tipo === "site") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="${c.valor.startsWith('http') ? c.valor : 'https://' + c.valor}"
+       target="_blank">
+      <i class="fas fa-globe"></i>
+      Site
+    </a>
+  `;
+}
+
+if (c.tipo === "instagram") {
+  contatos.innerHTML += `
+    <a class="contato-btn"
+       href="https://instagram.com/${c.valor.replace('@','')}"
+       target="_blank">
+      <i class="fab fa-instagram"></i>
+      ${c.valor}
+    </a>
+  `;
+}
+
 
 });
 

@@ -5,9 +5,8 @@ const IMOBILIARIAS = [
     logo: "img/imobiliarias/solar.png",
     cidade: "Itaúna",
     contatos: [
-      { tipo: "Telefone", valor: " 553732412639" },
-      { tipo: "whatsapp", valor: " 553732412639" },
-      { tipo: "whatsapp", valor: " 5537991076616" },
+      { tipo: "telefone", valor: " (37)32412639" },
+      { tipo: "whatsapp", valor: " (37)991076616" },
       {tipo: "site", valor: "https://www.solaritauna.com.br/"}
     ]
   },
@@ -17,8 +16,8 @@ const IMOBILIARIAS = [
     logo: "img/imobiliarias/saitaimovel.png",
     cidade: "Itaúna",
     contatos: [
-      { tipo: "Telefone", valor: " 5532421444" },
-      { tipo: "whatsapp", valor: " 5537984055326" },
+      { tipo: "telefone", valor: " (37)32421444" },
+      { tipo: "whatsapp", valor: " (37)984055326" },
       {tipo: "site", valor: "https://www.saitaimoveis.com.br"}
     ]
   },
@@ -28,7 +27,7 @@ const IMOBILIARIAS = [
     logo: "img/imobiliarias/legatto.png",
     cidade: "Itaúna",
     contatos: [
-      { tipo: "Telefone", valor: "(37)3242-1330" },
+      { tipo: "telefone", valor: "(37)3242-1330" },
       { tipo: "whatsapp", valor: "(37)988292132 Vendas" },
       { tipo: "whatsapp", valor: "(37)998755785 Locação" },
       {tipo: "site", valor: "https://www.legattoimoveis.com.br/"}
@@ -50,7 +49,7 @@ const IMOBILIARIAS = [
     logo: "img/imobiliarias/emobe.png",
     cidade: "Itaúna",
     contatos: [
-      { tipo: "Telefone", valor: "(37)41010415" },
+      { tipo: "telefone", valor: "(37)41010415" },
       { tipo: "whatsapp", valor: "(37)999251577" },
       {tipo: "site", valor: "https://www.emobe.com.br/"}
     ]

@@ -67,26 +67,39 @@ function abrirModal(imob) {
     div.className = "contato";
 
     let icone = "";
+    let classeIcone = "";
     let texto = c.valor;
 
-    if (c.tipo.toLowerCase() === "whatsapp") {
-      icone = "📱";
-    }
+     if (c.tipo.toLowerCase() === "whatsapp") {
+      icone = "fab fa-whatsapp";
+      classeIcone = "icone-whatsapp";
+    };
 
     if (c.tipo.toLowerCase() === "telefone") {
-      icone = "☎️";
-    }
+      icone = "fas fa-phone";
+      classeIcone = "icone-telefone";
+    };
 
     if (c.tipo.toLowerCase() === "site") {
-      icone = "🌐";
+      icone = "fas fa-globe";
+      classeIcone = "icone-site";
       texto = c.valor.replace("https://", "");
-    }
+    };
+
+    if (c.tipo.toLowerCase() === "instagram") {
+      icone = "fab fa-instagram";
+      classeIcone = "icone-instagram";
+    };
     
 
     div.innerHTML = `
-      <span>${icone} ${texto}</span>
-      <button onclick="copiar('${c.valor}')">Copiar</button>
-    `;
+  <span class="texto-contato">
+    <i class="${icone} ${classeIcone}"></i>
+    ${texto}
+  </span>
+
+  <button onclick="copiar('${c.valor}')">Copiar</button>
+`;
 
     modalContatos.appendChild(div);
   });

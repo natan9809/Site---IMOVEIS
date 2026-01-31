@@ -220,7 +220,7 @@ function mostrarFiltrosAtivos() {
     // Botões SEMPRE presentes
     area.innerHTML += `
         <button id="alterar-tipo" onclick="abrirAlterarTipo()">Alterar tipo</button>
-        <button id="alterar-filtros" onclick="abrirAlterarFiltros()">Alterar filtros</button>
+        <!--<button id="alterar-filtros" onclick="abrirAlterarFiltros()">Alterar filtros</button-->
         <button id="limpar-tudo" onclick="limparTudo()">Limpar tudo</button>
     `;
 }
@@ -447,10 +447,20 @@ function atualizarContador() {
 
     const total = calcularQuantidadeDisponivel();
 
+    // plural correto do tipo
+    let tipoTexto = "itens";
+
+    if (tipoSelecionado) {
+        if (tipoSelecionado === "lote") tipoTexto = total === 1 ? "lote" : "lotes";
+        if (tipoSelecionado === "casa") tipoTexto = total === 1 ? "casa" : "casas";
+        if (tipoSelecionado === "apartamento")
+            tipoTexto = total === 1 ? "apartamento" : "apartamentos";
+    }
+
     contador.innerText =
-        total === 1
-            ? "1 item disponível"
-            : `${total} itens disponíveis`;
+        total === 0
+            ? "Nenhum item disponível"
+            : `${total} ${tipoTexto} disponíveis`;
 }
 
 function salvarEstado() {

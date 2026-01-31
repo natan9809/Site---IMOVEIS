@@ -146,7 +146,7 @@ h1 {
 /* LOGO NO MODAL */
 .modal-logo {
   max-width: 140px;
-  max-height: 80px;
+  max-height: 100px;
   object-fit: contain;
   margin-bottom: 10px;
 }
@@ -200,10 +200,38 @@ h1 {
   background: #16613e;
 }
 
+
+.texto-contato {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+
 /* ================= FOOTER ================= */
 .footer {
   padding: 20px;
   text-align: center;
   background: #1f7a4f;
   color: white;
+}
+
+@media (max-width: 768px) {
+
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

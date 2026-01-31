@@ -35,7 +35,8 @@ const CORRETORES = [
     foto: "img/corretores/gonzaga.jpg",
     cidade: "Itaúna - MG",
     contatos: [
-      { tipo: "whatsapp", valor: "(37)999810092" }
+      { tipo: "whatsapp", valor: "(37)999810092" },
+      { tipo: "instagram", valor: "gonzagaimoveisitauna"}
     ]
   },
   {
@@ -45,6 +46,7 @@ const CORRETORES = [
     cidade: "Itaúna - MG",
     contatos: [
       { tipo: "whatsapp", valor: "(37)37998303181" },
+      { tipo: "instagram", valor: "jadielw.soares"}
     ]
   },
   {
@@ -54,6 +56,7 @@ const CORRETORES = [
     cidade: "Itaúna - MG",
     contatos: [
       { tipo: "whatsapp", valor: "(37)999210701" },
+      { tipo: "instagram", valor: "eduardocorretoritauna"}
     ]
   },
   {
@@ -64,6 +67,16 @@ const CORRETORES = [
     contatos: [
       { tipo: "whatsapp", valor: "(37)998678378" },
       {tipo: "site", valor: "https://www.samarprime.com.br/"}
+    ]
+  },
+  {
+    id: 6,
+    nome: "	Isaac Vasconcelos",
+    foto: "img/corretores/isacvasconcelo.jpg",
+    cidade: "Itaúna - MG",
+    contatos: [
+      { tipo: "whatsapp", valor: "(37)991170462" },
+      {tipo: "instagram", valor: "isaaccorretor"}
     ]
   }
 ];

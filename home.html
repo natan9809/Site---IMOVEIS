@@ -28,6 +28,11 @@
 </header>
 
     <div id="filtros-ativos"></div><!--Alterar tipo, alterar filtro e limpar tudo, criado em JS-->
+    
+    <p id="contador-disponiveis" style="font-weight:bold;">
+                0 imovel para vizualizar
+            </p>
+
 
     <div id="ordenacao"> <!--criado botao de ordenação, funçao em JS-->
         <span>Ordenar por:</span>
@@ -39,21 +44,11 @@
     </main>
 
 <div id="modal" class="modal" onclick="fecharModal()"> <!--Moda janela flutuante-->
-    <div class="modal-content" onclick="event.stopPropagation()"><!--container do modal-->
+    <div class="modal-content" onclick="event.stopPropagation()"> <!--container do modal-->
 
         <div id="intro-texto">
-            <h2>Olá 👋</h2>
-            <p>
-                Aqui você encontra IMOVEL que não existem em outros sites.<br>
-                Nosso IDEAL é facilitar e ajudar no seu sonho.<br>
-                Apenas divulgamos as opções.
-            </p>
+        
         </div>
-
-        <p id="contador-disponiveis" style="margin-top:10px; font-weight:bold;">
-            0 imovel para vizualizar
-        </p>
-
 
         <!-- ETAPA 1 -->
         <div id="step1">
