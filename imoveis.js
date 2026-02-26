@@ -1,14 +1,14 @@
 const IMOVEIS = [
   {
     id: 1,
-    tipo: "casa",
+    tipo: "casa - ",
     bairro: "Centro",
     cidade: "Itaúna",
     imagem: "img/imoveis/1/casaIA.jpeg",
     destaque: true,
-    preco: 420000,
-    tamanho: 160,
-    construido: 250,
+    preco: 0,
+    tamanho: 0,
+    construido: 0,
     quarto:3,
     sala:1,
     banheiro:1,
