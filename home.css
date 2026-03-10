@@ -304,3 +304,7 @@ a {
   background: #1f7a4f;
   color: white;
 }
+
+#modal-aviso {
+    display: none;
+}

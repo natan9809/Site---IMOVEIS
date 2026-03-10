@@ -1,7 +1,7 @@
 const IMOVEIS = [
   {
     id: 1,
-    tipo: "casa - ",
+    tipo: "casa",
     bairro: "Centro",
     cidade: "Itaúna",
     imagem: "img/imoveis/1/casaIA.jpeg",

@@ -345,8 +345,8 @@ function abrirAlterarTipo() { // OBS: Alterar tipo pelo
 }
 
 function fecharModalAviso() {
-    avisoAberto = false;
     document.getElementById("modal-aviso").style.display = "none";
+    limparTudo()
 }
 
 function mostrarModalNenhumImovel() {

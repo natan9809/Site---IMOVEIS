@@ -336,6 +336,21 @@ function fecharMenu() {
   document.getElementById("overlay").classList.remove("ativo");
 }
 
+async function publicarImovel(imovel) {
+  await fetch("https://SEU-SERVIDOR.onrender.com/publicar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      titulo: `${imovel.tipo.toUpperCase()} - ${imovel.bairro}`,
+      descricao: `R$ ${imovel.preco} | ${imovel.tamanho}m²`,
+      imagem: imovel.imagens[0]
+    })
+  });
+
+  alert("Publicado nas redes!");
+}
 
 
 renderizarMiniaturas();
