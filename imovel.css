@@ -602,3 +602,23 @@ a {
   opacity: 1;
   border-color: #1f7a4f;
 }
+
+.modal.hidden{
+  display:none;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-content{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  width:300px;
+}

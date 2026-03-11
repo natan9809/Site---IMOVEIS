@@ -4,6 +4,7 @@ const id = Number(params.get("id"));
 const imovel = IMOVEIS.find(i => i.id === id);
 
 let indiceImagem = 0;
+let empresaSelecionada = null;
 
 // ELEMENTOS
 const titulo = document.getElementById("titulo-imovel");
@@ -69,7 +70,7 @@ if (Array.isArray(imovel.empresas)) {
       <p>${dados.nome}</p>
     `;
 
-    div.onclick = () => abrirModalContatoEmpresa(dados, ref.tipo);
+    div.onclick = () => abrirModalNome(dados);
     empresas.appendChild(div);
   });
 }
@@ -351,6 +352,77 @@ async function publicarImovel(imovel) {
   });
 
   alert("Publicado nas redes!");
+}
+
+function abrirModalNome(dados) {
+  empresaSelecionada = dados;
+  document.getElementById("modal-nome").classList.remove("hidden");
+}
+
+function fecharModalNome() {
+  document.getElementById("modal-nome").classList.add("hidden");
+}
+
+function fecharModalRepresentante(){
+  document.getElementById("modal-representante").classList.add("hidden");
+}
+
+
+function enviarNome(){
+
+  const nome = document.getElementById("nome-usuario").value;
+
+  if(!nome){
+    alert("Digite seu nome");
+    return;
+  }
+
+  // pega ID do imóvel da URL
+  const params = new URLSearchParams(window.location.search);
+  const idImovel = params.get("id");
+
+  const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeS5FpkkyQbOa14an6V6dmvnDt8jBYf9uTwj06L2JV0shV3Fw/formResponse";
+
+  const data = new FormData();
+
+  data.append("entry.2016223875", nome); // nome visitante
+  data.append("entry.1131451038", empresaSelecionada.nome); // corretor ou imobiliaria
+  data.append("entry.1875968337", idImovel); // ID do imóvel
+
+  fetch(FORM_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
+
+  fecharModalNome();
+
+  document.getElementById("msg-boasvindas").innerText =
+  `Olá ${nome}, aqui está o contato de ${empresaSelecionada.nome}`;
+
+  mostrarContatos(empresaSelecionada);
+
+  document.getElementById("modal-representante").classList.remove("hidden");
+}
+
+function mostrarContatos(dados){
+
+  const lista = document.getElementById("lista-contatos");
+  lista.innerHTML = "";
+
+  dados.contatos.forEach(c => {
+
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+      <strong>${c.tipo}</strong>: ${c.valor}
+    `;
+
+    lista.appendChild(div);
+
+  });
+
 }
 
 
