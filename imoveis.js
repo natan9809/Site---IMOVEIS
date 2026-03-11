@@ -140,5 +140,91 @@ const IMOVEIS = [
     
     
     },
+  {
+      id: 4,
+      tipo: "Lote",
+      bairro: "",
+      cidade: "Itaúna",
+      imagem: "img/imoveis/4/ChatGPT Image 10_03_2026, 23_17_11.png",
+      destaque: true,
+      preco: 140000,
+      tamanho: 20000,
+      construido: 0,
+      quarto:0,
+      sala:0,
+      banheiro:0,
+      cozinha:0,
+      areadeserviço:0,
+
+      imagens: [
+        "img/imoveis/4/ChatGPT Image 10_03_2026, 23_14_20.png",
+        "img/imoveis/4/ChatGPT Image 10_03_2026, 23_17_11.png"
+      ],
+
+      resumo: [
+        "2 Hectares", "15km de Itaúna", "Corrego natural na propriedade"
+      ],
+
+      descricao: "Excelente oportunidade para quem procura tranquilidade e contato com a natureza. Terreno com aproximadamente 2 hectares, localizado a cerca de 15 km de Itaúna, com acesso por 4,5 km de estrada de terra. A propriedade conta com córrego natural. Possui documentação e oferece ótima opção tanto para quem deseja um espaço rural quanto para investimento. O proprietário aceita carro como parte do pagamento, conforme avaliação.",
+
+      caracteristicas: [
+        "Área total de 2 hectares",
+        "Córrego na propriedade",
+        "Ideal para sítio ou lazer",
+        "15 km de Itaúna",
+        "4,5 km de estrada de terra",
+        "Aceita veículo na negociação",
+        "Documentação disponível"
+      ],
+
+      empresas: [
+      { tipo: "corretores", id: 9 },
+      ]
+    
+    
+    },
+  {
+      id: 5,
+      tipo: "Lote",
+      bairro: "Brejo Alegre",
+      cidade: "Itaúna",
+      imagem: "img/imoveis/5/ChatGPT Image 10_03_2026, 23_58_31.png",
+      destaque: true,
+      preco: 350000,
+      tamanho: 20000,
+      construido: 0,
+      quarto:0,
+      sala:0,
+      banheiro:0,
+      cozinha:0,
+      areadeserviço:0,
+
+      imagens: [
+        "img/imoveis/5/ChatGPT Image 10_03_2026, 23_58_31.png",
+      ],
+
+      resumo: [
+        "Terreno amplo com 2 hectares",
+        "Topografia excelente",
+        "Localizado no Brejo Alegre",
+        "Próximo à fábrica de alumínio",
+        "Ideal para sítio, investimento ou empreendimento",
+      ],
+
+      descricao: "Excelente oportunidade para quem procura um terreno amplo e bem localizado. Área com 2 hectares, topografia excelente, facilitando projetos de construção, chácaras ou empreendimentos. O imóvel está localizado na região do Brejo Alegre, fácil acesso, próximo à fábrica de alumínio. Ideal para quem deseja investir, construir um sítio, área de lazer ou desenvolver projetos futuros.",
+      
+      caracteristicas: [
+        "Topografia excelente",
+        "Fácil acesso",
+        "Próximo a indústria de alumínio",
+        "Ideal para sítio ou investimento"
+      ],  
+
+      empresas: [
+      { tipo: "corretores", id: 9 },
+      ]
+    
+    
+    },
 
 ]

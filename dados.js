@@ -7,7 +7,8 @@ const BAIRROS = [
   "Jadir Marinho",
   "Cidade Nova",
   "Parque Jardim",
-  "Cachoeirinha"
+  "Cachoeirinha",
+  "Brejo Alegre"
 ];
 
 const TIPOS = [
