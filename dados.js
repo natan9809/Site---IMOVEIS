@@ -6,11 +6,13 @@ const BAIRROS = [
   "Morada Nova",
   "Jadir Marinho",
   "Cidade Nova",
-  "Parque Jardim"
+  "Parque Jardim",
+  "Cachoeirinha"
 ];
 
 const TIPOS = [
   "Casa",
   "Apartamento",
-  "Lote"
+  "Lote",
+  "Chácara"
 ];

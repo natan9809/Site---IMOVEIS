@@ -88,5 +88,14 @@ const CORRETORES = [
       { tipo: "whatsapp", valor: "(37)3799467497" },
       {tipo: "instagram", valor: "marcussalomeconsultor"}
     ]
+  },
+  {
+    id: 9,
+    nome: "Mário",
+    foto: "img/corretores/mario.jpg",
+    cidade: "Itaúna - MG",
+    contatos: [
+      { tipo: "whatsapp", valor: "(37)37998116677" }
+    ]
   }
 ];

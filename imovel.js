@@ -15,14 +15,15 @@ const preco = document.getElementById("preco");
 const descricao = document.getElementById("descricao");
 const empresas = document.getElementById("lista-empresas");
 const detalhes = document.getElementById("detalhes");
+const resumo = document.getElementById("resumo");
 
 // PREENCHE DADOS
 titulo.innerText = `${imovel.tipo.toUpperCase()} no Bairro ${imovel.bairro}`;
 img.src = imovel.imagens[0];
 local.innerText = `📍 ${imovel.bairro} - ${imovel.cidade}`;
-tamanho.innerText = `📐 ${imovel.tamanho} m² construido`;
-construido.innerText = `📐 ${imovel.construido} m² de lote`;
-detalhes.innerText = `🛋️ ${imovel.sala} sala 🚿${imovel.banheiro} banheiro 🛏️${imovel.quarto} quarto`;
+tamanho.innerText = `📐 ${imovel.tamanho} m² de lote`;
+construido.innerText = `📐 ${imovel.construido} m² construido`;
+detalhes.innerText = `🛋️ ${imovel.sala} sala 🚿${imovel.banheiro} banheiro 🛏️${imovel.quarto} quarto 🍽️${imovel.cozinha} cozinha 🧺${imovel.areadeserviço} área de serviço`
 preco.innerText = `💰 R$ ${imovel.preco.toLocaleString("pt-BR")}`;
 descricao.innerText = imovel.descricao || "";
 
